@@ -38,7 +38,7 @@ jobs:
       # Build docs (Starlight)
       - name: Install docs dependencies
         run: npm ci
-        working-directory: ./docs
+        working-directory: ./docs/starlight
 
       - name: Build docs
         run: npm run build
