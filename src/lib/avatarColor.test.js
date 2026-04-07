@@ -17,6 +17,11 @@ describe('avatarColor', () => {
     const unique = new Set(colors);
     expect(unique.size).toBeGreaterThan(1);
   });
+
+  it('handles empty string gracefully', () => {
+    expect(avatarColor('')).toBe(avatarColor(''));  // deterministic
+    expect(typeof avatarColor('')).toBe('string');
+  });
 });
 
 describe('avatarInitials', () => {

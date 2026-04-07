@@ -15,6 +15,7 @@ const PALETTE = [
  * @returns {string} hex color
  */
 export function avatarColor(name) {
+  if (!name) return PALETTE[0];
   let hash = 0;
   for (let i = 0; i < name.length; i++) {
     hash = (hash * 31 + name.charCodeAt(i)) >>> 0;
@@ -30,7 +31,7 @@ export function avatarColor(name) {
  * @returns {string}
  */
 export function avatarInitials(name) {
-  if (!name) return '?';
+  if (!name || !name.trim()) return '?';
   const words = name.trim().split(/\s+/);
   if (words.length >= 2) {
     return (words[0][0] + words[1][0]).toUpperCase();
