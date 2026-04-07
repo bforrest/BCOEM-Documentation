@@ -126,24 +126,27 @@ All components live in `src/components/`:
 
 ## Starlight Integration
 
-Components are registered globally via MDX's `components` option in `astro.config.mjs`, so `.mdx` files can use `<Thread>`, `<Reply>`, and `<IssueThread>` without an import statement.
+Components are imported per `.mdx` file using standard Astro import syntax. Starlight already bundles `@astrojs/mdx` — no additional integration config is needed in `astro.config.mjs`.
 
-```js
-// astro.config.mjs
-import mdx from '@astrojs/mdx';
+```mdx
+---
+title: My Q&A Page
+---
 
-export default defineConfig({
-  integrations: [
-    starlight({ ... }),
-    mdx({
-      components: {
-        Thread: './src/components/Thread.astro',
-        Reply: './src/components/Reply.astro',
-        IssueThread: './src/components/IssueThread.astro',
-      }
-    })
-  ]
-});
+import Thread from '../../../components/Thread.astro';
+import Reply from '../../../components/Reply.astro';
+
+<Thread issue="https://github.com/org/repo/issues/42">
+  <Reply author="User">...</Reply>
+</Thread>
+```
+
+For `IssueThread`, import from the same `components/` directory:
+
+```mdx
+import IssueThread from '../../../components/IssueThread.astro';
+
+<IssueThread id={42} />
 ```
 
 ---
