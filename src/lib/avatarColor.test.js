@@ -19,8 +19,7 @@ describe('avatarColor', () => {
   });
 
   it('handles empty string gracefully', () => {
-    expect(avatarColor('')).toBe(avatarColor(''));  // deterministic
-    expect(typeof avatarColor('')).toBe('string');
+    expect(avatarColor('')).toBe('#0969da'); // PALETTE[0] — explicit guard in implementation
   });
 });
 
