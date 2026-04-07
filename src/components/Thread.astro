@@ -1,0 +1,62 @@
+---
+interface Props {
+  issue?: string;
+}
+
+const { issue } = Astro.props;
+
+// Extract a short label from the issue URL, e.g. "#42"
+function issueLabel(url: string): string {
+  const match = url.match(/\/issues\/(\d+)/);
+  return match ? `#${match[1]}` : 'Issue';
+}
+---
+
+<div class="thread">
+  {issue && (
+    <div class="thread-header">
+      <a
+        href={issue}
+        target="_blank"
+        rel="noopener noreferrer"
+        class="thread-issue-link"
+      >
+        {issueLabel(issue)} on GitHub ↗
+      </a>
+    </div>
+  )}
+  <div class="thread-body">
+    <slot />
+  </div>
+</div>
+
+<style>
+  .thread {
+    border: 1px solid var(--sl-color-hairline);
+    border-radius: 8px;
+    overflow: hidden;
+    margin: 1.5rem 0;
+  }
+
+  .thread-header {
+    background: var(--sl-color-bg-nav);
+    border-bottom: 1px solid var(--sl-color-hairline);
+    padding: 8px 14px;
+    display: flex;
+    justify-content: flex-end;
+  }
+
+  .thread-issue-link {
+    font-size: 0.75rem;
+    color: var(--sl-color-text-accent);
+    text-decoration: none;
+  }
+
+  .thread-issue-link:hover {
+    text-decoration: underline;
+  }
+
+  .thread-body {
+    padding: 16px;
+  }
+</style>
