@@ -1,0 +1,36 @@
+---
+title: "Can't add judges to tables"
+---
+
+import Thread from '../../../components/Thread.astro';
+import Reply from '../../../components/Reply.astro';
+
+<Thread>
+  <Reply author="Forum User">
+    Can't add judges to tables, in either planning mode or preparation mode. Was able to add
+    some judges to Session 1, but have repeatedly tried to add judges to remaining tables in
+    subsequent sessions. It allows me to go to assign judges, click the available judges to
+    assign to the table, then click Assign Judges, and then says "Info edited successfully",
+    but then no judges are actually assigned. Tried many times and refreshed. Why can't I
+    assign judges to my tables?
+    <Reply slot="replies" author="BCOEMSupport">
+      I'm sorry you're experiencing this issue. However, I'm not able to recreate it in my
+      2.8.2 test environment. I created multiple tables and was able to assign/unassign judges
+      and stewards to each in both Tables Planning and Competition modes.
+
+      It's curious that you were able to assign judges to Session 1 but not others. This
+      indicates the assignment scripting worked at that time, so there may be other conditions
+      present. Could you check:
+
+      - Whether you can still assign/unassign judges to Session 1 tables
+      - If not using queued judging, that all tables have flights defined
+      - If not using queued judging, that all flights are assigned to rounds
+      - Whether you added any sessions after the judging signup window
+      - Whether you have any mods or altered code running
+      <Reply slot="replies" author="Forum User">
+        AH yes — the Tables had not yet been assigned to rounds. Now I am able to assign
+        judges. Thank you for the quick response!
+      </Reply>
+    </Reply>
+  </Reply>
+</Thread>
