@@ -4,7 +4,8 @@ import starlight from '@astrojs/starlight';
 
 // https://astro.build/config
 export default defineConfig({
-	site: 'https://bforrest.com/bcoem-documentation/',
+	site: 'https://bforrest.com',
+	base: '/BCOEM-Documentation',
 	integrations: [
 		starlight({
 			title: 'BCOEM Good To Know',
