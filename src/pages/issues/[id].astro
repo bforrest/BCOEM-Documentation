@@ -1,0 +1,18 @@
+---
+import StarlightPage from '@astrojs/starlight/components/StarlightPage.astro';
+import IssueThread from '../../components/IssueThread.astro';
+import issues from '../../data/issues.json';
+
+export function getStaticPaths() {
+  return issues.map((issue) => ({
+    params: { id: String(issue.id) },
+    props: { issue },
+  }));
+}
+
+const { issue } = Astro.props;
+---
+
+<StarlightPage frontmatter={{ title: issue.title }}>
+  <IssueThread id={issue.id} />
+</StarlightPage>
