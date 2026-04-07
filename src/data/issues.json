@@ -1,1 +1,681 @@
-[]
+[
+  {
+    "id": 1667,
+    "title": "How to assign entries in same BJCP category to different flights",
+    "url": "https://github.com/geoffhumphrey/brewcompetitiononlineentry/issues/1667",
+    "author": "price95682",
+    "body": "In an upcoming competition there are two groups of entrants that have entries in the same BJCP category but need to be in separate flights.  Google queries say this is possible.  We are using BCOE&M version 3.0.0 on our own server, not hosted.  I have set \"Use Queued Judging\" to Off.  However, the available documentation and query results don't say details of how to assign the entrants to separate flights.  How can this be done?",
+    "comments": [
+      {
+        "author": "geoffhumphrey",
+        "body": "A few of things to check. The first you already mentioned - setting \"Use Queued Judging\" to off via Judging Competition/Organization preferences.\n\nThe second is what the Maximum Entries per Flight number is on the same preferences screen - this is the maximum number of entries a judge pair will be assigned to evaluate in the system per flight. Generally, this number is 12 or under.\n\nThird is what the Maximum Rounds per Session number is, again on the same preferences screen - this is the maximum number of judging rounds for each defined judging session.\n\nFourth, check how many rounds each of your Judging Sessions has defined by going to Admin Dashboard > Preparing > Manage Judging Sessions. You can define rounds for each session up to the Maximum Rounds per Session you checked earlier. If you wish to have a judging session feature multiple rounds, this is where to delineate that. Most comps I've seen simply have a single round for each judging session. However, the ability is there if you need it.\n\nNext, go to Admin Dashboard > Organizing > Manage Tables. The steps to create and assign judges and stewards are laid out for you there:\n\n<img width=\"959\" height=\"201\" alt=\"Image\" src=\"https://github.com/user-attachments/assets/85ebd898-1e8d-45f2-997c-17473a06fae5\" />\n\nFirst, make sure to assign judges and stewards to their respective \"pools.\" As of version 3.0.0, judges and stewards are automatically assigned to their respective pools upon registration _providing they registered as one or the other_. \n\nNext, define/create your table.\n1. Select the Add a Table button or link from the \"Step 2: Define All Tables\" section.\n2. Create your by Table by giving it a name, a number, assigning it to a judging session, and selecting one or more sub-categories to include.\n3. Select Add\n4. To be able to split the table into 2 or more flights, you need to make sure that the number of entries **exceeds** the Maximum Entries per Flight (red arrow below).\n\n<img width=\"857\" height=\"528\" alt=\"Image\" src=\"https://github.com/user-attachments/assets/b3effb25-411e-4045-a1b4-29463424d0a6\" />\n\nThen, define your flights. Again, you'll only be able to split the table into flights if the number of entries at the table exceeds the Maximum Entries per Flight.\n1. Expand the \"Step 3: Define All Flights\" section.\n2. Select the table from the drop-down\n3. Select the corresponding radio buttons to assign each entry to a flight.\n4. Select Update\n\n<img width=\"1063\" height=\"725\" alt=\"Image\" src=\"https://github.com/user-attachments/assets/34a4b013-0c18-4ef0-ab03-af2903b62222\" />\n\nAfter defining flights, you'll need to assign each flight to a round in the judging session. If your Maximum Rounds per Session is 1, you can skip this step. Otherwise, expand \"Step 4: Assign Flights to Rounds\" and select assign each flight to a round.\n\n<img width=\"699\" height=\"311\" alt=\"Image\" src=\"https://github.com/user-attachments/assets/4af2986d-4862-4140-9252-718daccb1f88\" />\n\nAfter that, you can then assign judges to flights at each table.\n\nHope that helps!"
+      },
+      {
+        "author": "price95682",
+        "body": "Thanks!  It would be good to make this available somehow in documentation.  There could also be other topics that people have asked about, that people could find through searches.  In this case it should work to just copy this answer into a document somewhere, like a FAQ.  Again, thanks very much. On Feb 27, 2026, at 12:36 PM, Geoff Humphrey ***@***.***> wrote:﻿geoffhumphrey left a comment (geoffhumphrey/brewcompetitiononlineentry#1667)\r\nA few of things to check. The first you already mentioned - setting \"Use Queued Judging\" to off via Judging Competition/Organization preferences.\r\nThe second is what the Maximum Entries per Flight number is on the same preferences screen - this is the maximum number of entries a judge pair will be assigned to evaluate in the system per flight. Generally, this number is 12 or under.\r\nThird is what the Maximum Rounds per Session number is, again on the same preferences screen - this is the maximum number of judging rounds for each defined judging session.\r\nFourth, check how many rounds each of your Judging Sessions has defined by going to Admin Dashboard > Preparing > Manage Judging Sessions. You can define rounds for each session up to the Maximum Rounds per Session you checked earlier. If you wish to have a judging session feature multiple rounds, this is where to delineate that. Most comps I've seen simply have a single round for each judging session. However, the ability is there if you need it.\r\nNext, go to Admin Dashboard > Organizing > Manage Tables. The steps to create and assign judges and stewards are laid out for you there:\r\nimage.png (view on web)\r\nFirst, make sure to assign judges and stewards to their respective \"pools.\" As of version 3.0.0, judges and stewards are automatically assigned to their respective pools upon registration providing they registered as one or the other.\r\nNext, define/create your table.\r\n\r\nSelect the Add a Table button or link from the \"Step 2: Define All Tables\" section.\r\nCreate your by Table by giving it a name, a number, assigning it to a judging session, and selecting one or more sub-categories to include.\r\nSelect Add\r\nTo be able to split the table into 2 or more flights, you need to make sure that the number of entries exceeds the Maximum Entries per Flight (red arrow below).\r\n\r\nimage.png (view on web)\r\nThen, define your flights. Again, you'll only be able to split the table into flights if the number of entries at the table exceeds the Maximum Entries per Flight.\r\n\r\nExpand the \"Step 3: Define All Flights\" section.\r\nSelect the table from the drop-down\r\nSelect the corresponding radio buttons to assign each entry to a flight.\r\nSelect Update\r\n\r\nimage.png (view on web)\r\nAfter defining flights, you'll need to assign each flight to a round in the judging session. If your Maximum Rounds per Session is 1, you can skip this step. Otherwise, expand \"Step 4: Assign Flights to Rounds\" and select assign each flight to a round.\r\nimage.png (view on web)\r\nAfter that, you can then assign judges to flights at each table.\r\nHope that helps!\r\n\r\n—Reply to this email directly, view it on GitHub, or unsubscribe.You are receiving this because you authored the thread.Message ID: ***@***.***>"
+      },
+      {
+        "author": "price95682",
+        "body": "Hi Geoff,\r\n\r\nIf I can check on another question:  The upcoming competition is a county\r\nfair, and the fair has its own entry system that it uses for all he\r\ncompetitions that a county fair includes.  So, we receive the entry data in\r\na spreadsheet.  I have been able to import the entrants and entries by\r\ngoing into MySQL and importing CSV files into the User, Brewer, and Brewing\r\ntables.  To get the file format, I first manually entered some of the\r\nentries through BCOE&M and exported those files from MySQL to CSV files,\r\nthen added the remaining entries, and imported the CSV file, making sure\r\nthat the fields with data were copied through the added rows.  However,\r\nwhen I try to assign the entries to tables and flights, BCOE&M doesn't see\r\nthem, and I need to edit the added entries within BCOE&M to use the\r\ndrop-down list of entry styles, in the entry space titled \"BJCP 2021 / 2025\r\nStyle\".  Is here anything I can set using MySQL so the imported entries\r\nwill be recognized?\r\n\r\nThanks very much,\r\nJim Price\r\n\r\n\r\nOn Fri, Feb 27, 2026 at 12:36 PM Geoff Humphrey ***@***.***>\r\nwrote:\r\n\r\n> *geoffhumphrey* left a comment\r\n> (geoffhumphrey/brewcompetitiononlineentry#1667)\r\n> <https://github.com/geoffhumphrey/brewcompetitiononlineentry/issues/1667#issuecomment-3974977844>\r\n>\r\n> A few of things to check. The first you already mentioned - setting \"Use\r\n> Queued Judging\" to off via Judging Competition/Organization preferences.\r\n>\r\n> The second is what the Maximum Entries per Flight number is on the same\r\n> preferences screen - this is the maximum number of entries a judge pair\r\n> will be assigned to evaluate in the system per flight. Generally, this\r\n> number is 12 or under.\r\n>\r\n> Third is what the Maximum Rounds per Session number is, again on the same\r\n> preferences screen - this is the maximum number of judging rounds for each\r\n> defined judging session.\r\n>\r\n> Fourth, check how many rounds each of your Judging Sessions has defined by\r\n> going to Admin Dashboard > Preparing > Manage Judging Sessions. You can\r\n> define rounds for each session up to the Maximum Rounds per Session you\r\n> checked earlier. If you wish to have a judging session feature multiple\r\n> rounds, this is where to delineate that. Most comps I've seen simply have a\r\n> single round for each judging session. However, the ability is there if you\r\n> need it.\r\n>\r\n> Next, go to Admin Dashboard > Organizing > Manage Tables. The steps to\r\n> create and assign judges and stewards are laid out for you there:\r\n> image.png (view on web)\r\n> <https://github.com/user-attachments/assets/85ebd898-1e8d-45f2-997c-17473a06fae5>\r\n>\r\n> First, make sure to assign judges and stewards to their respective\r\n> \"pools.\" As of version 3.0.0, judges and stewards are automatically\r\n> assigned to their respective pools upon registration *providing they\r\n> registered as one or the other*.\r\n>\r\n> Next, define/create your table.\r\n>\r\n>    1. Select the Add a Table button or link from the \"Step 2: Define All\r\n>    Tables\" section.\r\n>    2. Create your by Table by giving it a name, a number, assigning it to\r\n>    a judging session, and selecting one or more sub-categories to include.\r\n>    3. Select Add\r\n>    4. To be able to split the table into 2 or more flights, you need to\r\n>    make sure that the number of entries *exceeds* the Maximum Entries per\r\n>    Flight (red arrow below).\r\n>\r\n> image.png (view on web)\r\n> <https://github.com/user-attachments/assets/b3effb25-411e-4045-a1b4-29463424d0a6>\r\n>\r\n> Then, define your flights. Again, you'll only be able to split the table\r\n> into flights if the number of entries at the table exceeds the Maximum\r\n> Entries per Flight.\r\n>\r\n>    1. Expand the \"Step 3: Define All Flights\" section.\r\n>    2. Select the table from the drop-down\r\n>    3. Select the corresponding radio buttons to assign each entry to a\r\n>    flight.\r\n>    4. Select Update\r\n>\r\n> image.png (view on web)\r\n> <https://github.com/user-attachments/assets/34a4b013-0c18-4ef0-ab03-af2903b62222>\r\n>\r\n> After defining flights, you'll need to assign each flight to a round in\r\n> the judging session. If your Maximum Rounds per Session is 1, you can skip\r\n> this step. Otherwise, expand \"Step 4: Assign Flights to Rounds\" and select\r\n> assign each flight to a round.\r\n> image.png (view on web)\r\n> <https://github.com/user-attachments/assets/4af2986d-4862-4140-9252-718daccb1f88>\r\n>\r\n> After that, you can then assign judges to flights at each table.\r\n>\r\n> Hope that helps!\r\n>\r\n> —\r\n> Reply to this email directly, view it on GitHub\r\n> <https://github.com/geoffhumphrey/brewcompetitiononlineentry/issues/1667#issuecomment-3974977844>,\r\n> or unsubscribe\r\n> <https://github.com/notifications/unsubscribe-auth/B7B3QVR7EVPJZKCXNHHZC6D4OCTEBAVCNFSM6AAAAACWCCL57SVHI2DSMVQWIX3LMV43OSLTON2WKQ3PNVWWK3TUHMZTSNZUHE3TOOBUGQ>\r\n> .\r\n> You are receiving this because you authored the thread.Message ID:\r\n> ***@***.***\r\n> com>\r\n>\r\n"
+      }
+    ]
+  },
+  {
+    "id": 1666,
+    "title": "Version 2.8.2: Can't add judges to tables",
+    "url": "https://github.com/geoffhumphrey/brewcompetitiononlineentry/issues/1666",
+    "author": "ecomeaux",
+    "body": "\nSearched Issue Reports for Bug? No\n\nReviewed the Good To Know Issue Reports? No\n\n- Version: 2.8.2\n- Installation URL: https://brewingcompetitions.com/bluffcitybrewers/\n- Hosted Installation? No\n\n**Describe the Bug**\n\nCan't add judges to tables, in either planning mode or preparation mode. Was able to add some judges to Session 1, but have repeatedly tried to add judges to remaining tables in subsequent sessions. We need to assign judges like now. It allows me to go to assign judges, click the available judges to assign to the table, then click Assign Judges, and then says Info edited successfully, but then no judges are actually assigned, it remains empty. Tried many times & refreshed & whatnot. Why can't I assign judges to my tables?\n\n",
+    "comments": [
+      {
+        "author": "geoffhumphrey",
+        "body": "Hi @ecomeaux - I'm sorry you're experiencing this issue. However, but I'm not able to recreate it in my 2.8.2 test environment. I created multiple tables and was able to assign/unassign judges and stewards to each in both Tables Planning and Competition modes. \n\nIt's curious that you were able to assign judges to Session 1, but not to others. This indicates that the assignment processing scripting worked at that time, so there may be other conditions that were/are present when you're attempting to add judges to other tables assigned to other sessions. \n\nIf you are able to pull your server logs from the time when the failure occurred, those could help to pinpoint any processing errors.\n\nCould you provide some more insight into your environment and setup, specifically:\n- Whether or not you are still able to assign/unassign judges to tables that are in Session 1\n- All available judges are assigned to the \"judge pool\" - I'm assuming yes since you're seeing them when you try to assign to tables.\n- If you're not using queued judging, make sure all tables have flights defined\n- If you're not using queued judging, make sure all flights are assigned to rounds\n- Whether or not you have added any sessions after the judging signup window (judges who signed up before any sessions were added will not be marked as \"available\" for them)\n- Whether or not you have any mods or altered code running"
+      },
+      {
+        "author": "ecomeaux",
+        "body": "AH yes that was it, the Tables had not yet been assigned to rounds. Now I am able to assign judges. Thank you for the quick response!"
+      }
+    ]
+  },
+  {
+    "id": 1660,
+    "title": "Where I can change the Top Banner Images on the new V3 Site",
+    "url": "https://github.com/geoffhumphrey/brewcompetitiononlineentry/issues/1660",
+    "author": "afcdmc",
+    "body": "Your Installation's BCOE&M Info\n\nVersion: 3.0.0 \nHosted Installation? Yes\n\nWhere I can change the Top Banner Images on the new V3 Site?  I would like to put some of our own images in there!",
+    "comments": [
+      {
+        "author": "geoffhumphrey",
+        "body": "There's some explanation in the [index.pub.php](https://github.com/geoffhumphrey/brewcompetitiononlineentry/blob/master/index.pub.php) file. For convenience, it says:\n\n>Hero image array.\n>\n>If you would like to customize , simply add or subtract from the images listed in the array below. \n>\n>Or, provide your own images but name them in the [root]/images folder as they appear below.\n>\n>Please note that these are substantially wide and not very tall at a 6:1 ratio (3000x500) - optimized to serve as background images behind the name of the competition on the installation's home page up to very wide screen displays - they will scale down based upon the screen size.\n>\n>The background image is randomly chosen from the array below. \n>\n>* 0 is for misc (e.g., \"0-a\" or \"0-b\")\n>* 1 is for beer\n>* 2 is for cider\n>* 3 is for mead\n\nHere's the array the explanation mentions (starts [around line 49](https://github.com/geoffhumphrey/brewcompetitiononlineentry/blob/fe2633083adf4d49f7322aebb6073962b676fda5/index.pub.php#L49)):\n```\n    $bg_hero_images = array(\n        \"0-a\" => \"misc-cropped-bottles_3000x500.jpg\",\n        \"0-b\" => \"misc-brussels-bottles_3000x500.jpg\",\n        \"0-c\" => \"misc-plzen-fermenters_3000x500.jpg\",\n        \"0-d\" => \"misc-bottles_3000x500.jpg\",\n        \"1-a\" => \"beer-barley-malt_3000x500.jpg\",\n        \"1-b\" => \"beer-brussels-barrels_3000x500.jpg\",\n        \"1-c\" => \"beer-hop-cones_3000x500.jpg\",\n        \"1-d\" => \"beer-kegs_3000x500.jpg\",\n        \"1-e\" => \"beer-munich-mugs_3000x500.jpg\",\n        \"1-f\" => \"beer-on-bar_3000x500.jpg\",\n        \"2-a\" => \"cider-bottles_3000x500.jpg\",\n        \"3-a\" => \"mead-bottles_3000x500.jpg\",     \n    );\n\n```"
+      },
+      {
+        "author": "geoffhumphrey",
+        "body": "Unfortunately, since you are on a hosted installation, customization of those images is not available at this time.  My first comment is applicable for self-hosted installations."
+      }
+    ]
+  },
+  {
+    "id": 1609,
+    "title": "Home Page SQL Error - bootstrap.php is Being False-Flagged by Immunify 360 (Web Host Security)",
+    "url": "https://github.com/geoffhumphrey/brewcompetitiononlineentry/issues/1609",
+    "author": "NCBeerGuys",
+    "body": "I'm getting this message on the site - no idea how or why it was created.\n\nYou have an error in your SQL syntax; check the manual that corresponds to your MariaDB server version for the right syntax to use near '' at line 1",
+    "comments": [
+      {
+        "author": "geoffhumphrey",
+        "body": "This is an issue that came about this week - apparently, the /site/bootstrap.php file is being false-flagged by Immunify as containing malware and subsequently scrubbed. \n\nTo rectify, you'll need to restore the bootstrap.php file in your BCOEM directory structure and then make sure that the file is on your web host's Immunify \"exceptions\" list so it won't be scrubbed again.\n\nI'm currently on vacation, but will be looking into why this is happening when I return."
+      },
+      {
+        "author": "NCBeerGuys",
+        "body": "Thanks for the reply - the site is back up after I uploaded the backup of the bootstap.php file. I have no idea where the host's Immunify \"exceptions\" list is - I'm assuming I would have to contact the host or if it's a file I can update? It can wait until you return - enjoy your vacation!\n\nCheers!"
+      },
+      {
+        "author": "hkirkham86",
+        "body": "I reuploaded the bootstrap which also resolved the issue on my site but it was scrubbed again on the subsequent Immunify scan - so keep an eye on yours as it will probably go again too!\n\nI needed to request my webhost add the specific file to the ignore list as they retain admin privileges on Immunify - yours may be similar. I'm still waiting for them to do this."
+      },
+      {
+        "author": "geoffhumphrey",
+        "body": "I found this help article from Immunify360 - if one of you would, please follow that procedure to submit the file as a triggering a false-positive - none of the sites I maintain have Immunify360. When you report, please mention that the file is part of an open-source project maintained at GitHub here https://github.com/geoffhumphrey/brewcompetitiononlineentry.\n\nhttps://docs.imunify360.com/patchman/frequently_asked_questions/#how-do-i-report-an-incorrect-detection-false-positive\n\nFrom the help file:\n\n> If you believe that a detection is a false positive, please follow the following steps to report this to us:\n>\n> Get a copy of the exact file on your website that is flagged for detection by Patchman. Make note of the affected website, which server it is detected on, and the full file path of that file.\n>\n> Send an email to [support@patchman.co](mailto:support@patchman.co) in which you mention all the above details, and include the exact file as an attachment. **Please do not copy-paste the file’s contents into the email body. Some data may be lost which slows down our ability to help you. It must be included as an attachment.**\n>\n> Based on all this information, we will investigate the detection. If it is considered a legitimate detection, we will explain why that is. If it is indeed an incorrect detection, we will retract the signature, which would lead to automatically retracting all detections based on that signature."
+      },
+      {
+        "author": "Simon-Haynes",
+        "body": "Request submitted."
+      },
+      {
+        "author": "hkirkham86",
+        "body": "Request submitted here too."
+      },
+      {
+        "author": "hkirkham86",
+        "body": "A prompt, if slightly unhelpful response;\n\n\"We checked the attached file, but it does not detected in latest build of malware database.\nPlease run 'imunify360-agent update sigs --force' command and then run a scan of the user with this file to see if it is still removed.\n \nIf you still see this issue, please share access to the server for further investigation.\n \nPlease prepare your server according to this [KB article](https://cloudlinux.zendesk.com/hc/en-us/articles/6245802631068)\"\n\nRunning a CLI is slightly beyond my knowledge level but I will ask my webhost."
+      },
+      {
+        "author": "Simon-Haynes",
+        "body": "Yes, same response as mine."
+      },
+      {
+        "author": "Simon-Haynes",
+        "body": "I don’t know how reliable this is (not tested yet) but I have been advised that it should be possible to create a .imunify360.ignore file in your hosting root directory containing the full path of any files to be excluded. Can anyone validate this approach? Obviously, that could leave that file open to genuine abuse, but the entry could be removed once the signature update has been completed successfully."
+      },
+      {
+        "author": "geoffhumphrey",
+        "body": "This image of the Immunify dashboard was sent in another thread. The reasons for file being scrubbed may be provided via that dashboard; if anyone who has experienced this is able to find out what specifically in the file was triggering the false-positive, I would appreciate it. As I mentioned before, none of the installations I maintain use Immunifiy.\n\n![Image](https://github.com/user-attachments/assets/1a5f62f1-ade7-4c3a-b22a-30eb2873fa40)"
+      },
+      {
+        "author": "hkirkham86",
+        "body": "This is from my Imunify Log;\n\n![Image](https://github.com/user-attachments/assets/e88914fc-1259-427c-8f66-56ec97b7dcfa)\n\nText below:\n\nSMW-INJ-CLOUDAV-php.tool.remote-NPUT11504896617510780676-0,php.tool.remote-NPUT17179243499407476451-0,php.tool.remote-NPUT1994088424187118708-0\n\n"
+      },
+      {
+        "author": "Simon-Haynes",
+        "body": "I have been using ChatGPT to compare the new version of the bootstrap file with the previous version and it suggested that hardcoded links to an external site could trigger the false positive.\n\n$ajax_url = $base_url.\"ajax/\";\n$js_url = $base_url.\"js_includes/\";\nif (HOSTED) $js_url = \"https://brewingcompetitions.com/_bcoem_shared/js_includes/\";\n$images_url = $base_url.\"images/\";\nif (HOSTED) $images_url = \"https://brewingcompetitions.com/_bcoem_shared/images/\";\n$css_url = $base_url.\"css/\";\nif (HOSTED) $css_url = \"https://brewingcompetitions.com/_bcoem_shared/css/\";\n\nSpecifically in the section of code above the lines that start ‘if (HOSTED)…’ could be a red flag, worth a try removing them?\n\nI don’t want to speak too soon, but it looks like removing those three ‘HOSTED’ lines has resolved the issue for me - fingers crossed…"
+      },
+      {
+        "author": "Simon-Haynes",
+        "body": "> This image of the Immunify dashboard was sent in another thread. The reasons for file being scrubbed may be provided via that dashboard; if anyone who has experienced this is able to find out what specifically in the file was triggering the false-positive, I would appreciate it. As I mentioned before, none of the installations I maintain use Immunifiy.\n> \n> ![Image](https://github.com/user-attachments/assets/1a5f62f1-ade7-4c3a-b22a-30eb2873fa40)\n\nIt is the three ‘if (HOSTED)…’ lines, confirmed by deleting them resolving the issue. Imunify360 considers calls to external websites to be suspicious, as it is often used by malware to contact command & controls sites."
+      },
+      {
+        "author": "NCBeerGuys",
+        "body": "Tried that solution and it didn’t crash the site on navigation. The issue\r\nnow is it shows a spinning gear in the top left corner that says “Working.\r\nPlease stand by. Press Esc to hide.”\r\n\r\nHitting ESC doesn’t hide it and I’m thinking it’s caught in some loop?\r\n\r\n\r\n\r\nOn Wed, Jun 11, 2025 at 10:44 AM Simon-Haynes ***@***.***>\r\nwrote:\r\n\r\n> *Simon-Haynes* left a comment\r\n> (geoffhumphrey/brewcompetitiononlineentry#1609)\r\n> <https://github.com/geoffhumphrey/brewcompetitiononlineentry/issues/1609#issuecomment-2963121779>\r\n>\r\n> This image of the Immunify dashboard was sent in another thread. The\r\n> reasons for file being scrubbed may be provided via that dashboard; if\r\n> anyone who has experienced this is able to find out what specifically in\r\n> the file was triggering the false-positive, I would appreciate it. As I\r\n> mentioned before, none of the installations I maintain use Immunifiy.\r\n>\r\n> image.png (view on web)\r\n> <https://github.com/user-attachments/assets/1a5f62f1-ade7-4c3a-b22a-30eb2873fa40>\r\n>\r\n> It is the three ‘if (HOSTED)…’ lines, confirmed by deleting them resolving\r\n> the issue. Imunify360 considers calls to external websites to be\r\n> suspicious, as it is often used by malware to contact command & controls\r\n> sites.\r\n>\r\n> —\r\n> Reply to this email directly, view it on GitHub\r\n> <https://github.com/geoffhumphrey/brewcompetitiononlineentry/issues/1609#issuecomment-2963121779>,\r\n> or unsubscribe\r\n> <https://github.com/notifications/unsubscribe-auth/BJRDIAVXZ35AYYQ4PVAK73T3DA6FNAVCNFSM6AAAAAB6LFZ42WVHI2DSMVQWIX3LMV43OSLTON2WKQ3PNVWWK3TUHMZDSNRTGEZDCNZXHE>\r\n> .\r\n> You are receiving this because you authored the thread.Message ID:\r\n> ***@***.***\r\n> com>\r\n>\r\n"
+      },
+      {
+        "author": "Simon-Haynes",
+        "body": "> Tried that solution and it didn’t crash the site on navigation. The issue\n> now is it shows a spinning gear in the top left corner that says “Working.\n> Please stand by. Press Esc to hide.”\n> \n> Hitting ESC doesn’t hide it and I’m thinking it’s caught in some loop?\n> […](#)\n\nAre you sure you’re using the 2.7.2 version of the bootstrap file, with the above modification, as that was the effect I had of using the 2.6.2 version as a stop-gap."
+      },
+      {
+        "author": "geoffhumphrey",
+        "body": "> It is the three ‘if (HOSTED)…’ lines, confirmed by deleting them resolving the issue. Imunify360 considers calls to external websites to be suspicious, as it is often used by malware to contact command & controls sites.\n\nIf this is the case, attached here is an updated bootstrap.php file **(for version 2.7.2 _ONLY_)**. Unpack the attached zip and upload the contained bootstrap.php file to your installations /site/ directory. For all others, remove the lines that begin with `if (HOSTED)`.\n\n[bootstrap.zip](https://github.com/user-attachments/files/20699257/bootstrap.zip)"
+      },
+      {
+        "author": "NCBeerGuys",
+        "body": "We're running 2.7.0 - so now I'm more confused about the artifact. I'm\r\nassuming the best solution is to just update the site since removing the\r\n\"if\" on a version less than 2.7.2 is causing the artifact?\r\n\r\nOn Wed, Jun 11, 2025 at 7:55 PM Geoff Humphrey ***@***.***>\r\nwrote:\r\n\r\n> *geoffhumphrey* left a comment\r\n> (geoffhumphrey/brewcompetitiononlineentry#1609)\r\n> <https://github.com/geoffhumphrey/brewcompetitiononlineentry/issues/1609#issuecomment-2964569886>\r\n>\r\n> It is the three ‘if (HOSTED)…’ lines, confirmed by deleting them resolving\r\n> the issue. Imunify360 considers calls to external websites to be\r\n> suspicious, as it is often used by malware to contact command & controls\r\n> sites.\r\n>\r\n> If this is the case, attached here is an updated bootstrap.php file *(for\r\n> version 2.7.2 ONLY)*. Unpack the attached zip and upload the contained\r\n> bootstrap.php file to your installations /site/ directory. For all others,\r\n> remove the lines that begin with if (HOSTED).\r\n>\r\n> bootstrap.zip\r\n> <https://github.com/user-attachments/files/20699257/bootstrap.zip>\r\n>\r\n> —\r\n> Reply to this email directly, view it on GitHub\r\n> <https://github.com/geoffhumphrey/brewcompetitiononlineentry/issues/1609#issuecomment-2964569886>,\r\n> or unsubscribe\r\n> <https://github.com/notifications/unsubscribe-auth/BJRDIARKXBADH3DUO4OUCDD3DC6W3AVCNFSM6AAAAAB6LFZ42WVHI2DSMVQWIX3LMV43OSLTON2WKQ3PNVWWK3TUHMZDSNRUGU3DSOBYGY>\r\n> .\r\n> You are receiving this because you authored the thread.Message ID:\r\n> ***@***.***\r\n> com>\r\n>\r\n\r\n\r\n-- \r\n\r\n*Craft Beer Ambassador\"Drink Local and Keep Your Beer Dollars in North\r\nCarolina!\"*\r\n"
+      },
+      {
+        "author": "NCBeerGuys",
+        "body": "Updated anyway - best to have the latest. All went fine except there are\r\nthree errors that I don't understand:\r\n\r\nVersion 2.7.0.0 Updates\r\n\r\n   - ABV column NOT added to the brewing table.\r\n   - Sweetness Level column NOT added to the brewing table.\r\n   - Organization info column NOT added to the brewer table.\r\n\r\nShouldn't the above issues have been resolved with the update last year?\r\nI'm not sure which way to interpret this - that the columns haven't been\r\nadded (missing)? I have zero sql experience but assume it involves updating\r\nthe bcoem_baseline_2.7.X.sql file?\r\n\r\nOn Wed, Jun 11, 2025 at 7:55 PM Geoff Humphrey ***@***.***>\r\nwrote:\r\n\r\n> *geoffhumphrey* left a comment\r\n> (geoffhumphrey/brewcompetitiononlineentry#1609)\r\n> <https://github.com/geoffhumphrey/brewcompetitiononlineentry/issues/1609#issuecomment-2964569886>\r\n>\r\n> It is the three ‘if (HOSTED)…’ lines, confirmed by deleting them resolving\r\n> the issue. Imunify360 considers calls to external websites to be\r\n> suspicious, as it is often used by malware to contact command & controls\r\n> sites.\r\n>\r\n> If this is the case, attached here is an updated bootstrap.php file *(for\r\n> version 2.7.2 ONLY)*. Unpack the attached zip and upload the contained\r\n> bootstrap.php file to your installations /site/ directory. For all others,\r\n> remove the lines that begin with if (HOSTED).\r\n>\r\n> bootstrap.zip\r\n> <https://github.com/user-attachments/files/20699257/bootstrap.zip>\r\n>\r\n> —\r\n> Reply to this email directly, view it on GitHub\r\n> <https://github.com/geoffhumphrey/brewcompetitiononlineentry/issues/1609#issuecomment-2964569886>,\r\n> or unsubscribe\r\n> <https://github.com/notifications/unsubscribe-auth/BJRDIARKXBADH3DUO4OUCDD3DC6W3AVCNFSM6AAAAAB6LFZ42WVHI2DSMVQWIX3LMV43OSLTON2WKQ3PNVWWK3TUHMZDSNRUGU3DSOBYGY>\r\n> .\r\n> You are receiving this because you authored the thread.Message ID:\r\n> ***@***.***\r\n> com>\r\n>\r\n\r\n\r\n-- \r\n\r\n*Craft Beer Ambassador\"Drink Local and Keep Your Beer Dollars in North\r\nCarolina!\"*\r\n"
+      },
+      {
+        "author": "terryn7731",
+        "body": "Uploaded the new 2.7.2 bootstrap file above and it resolved the issue. I'll keep an eye on the site to make sure it doesn't get trashed during he next AV scan. BTW, our site was hosted at GoDaddy. Thanks for the excellent support!"
+      },
+      {
+        "author": "Beer-Ranger2",
+        "body": "I have version 2.7.1.1 loaded but having this error.\nThe bootstrap fix is **_for version 2.7.2 ONLY_**\n\nWhat is the my best option to get this fixed - load the 2.72 bootstrap anyway?  Update all the files to 2.72 with the fix?"
+      },
+      {
+        "author": "geoffhumphrey",
+        "body": "@Beer-Ranger2, if you're comfortable with removing a few lines from your installation's /sites/bootstrap.php file, do the following.\n\nRemove line 370:\n``if (HOSTED) $js_url = \"https://brewingcompetitions.com/_bcoem_shared/js_includes/\";``\n\nRemove line 373:\n``if (HOSTED) $images_url = \"https://brewingcompetitions.com/_bcoem_shared/images/\";``\n\nRemove line 376:\n``if (HOSTED) $css_url = \"https://brewingcompetitions.com/_bcoem_shared/css/\";``\n\nThis is specific to 2.7.1.X, but for all other installations, remove any full lines that have the URL https://brewingcompetitions.com (similar to those above)."
+      },
+      {
+        "author": "NCBeerGuys",
+        "body": "Our host added the bootstrap file to the ignore list and that fixed the\r\nissue. We had to get the site up asap for our upcoming competition.\r\n\r\n“Drink Local and Keep Your Beer Dollars in North Carolina!”\r\n\r\n\r\nOn Thu, Jul 10, 2025 at 12:33 PM Geoff Humphrey ***@***.***>\r\nwrote:\r\n\r\n> *geoffhumphrey* left a comment\r\n> (geoffhumphrey/brewcompetitiononlineentry#1609)\r\n> <https://github.com/geoffhumphrey/brewcompetitiononlineentry/issues/1609#issuecomment-3058156741>\r\n>\r\n> @Beer-Ranger2 <https://github.com/Beer-Ranger2>, if you're comfortable\r\n> with removing a few lines from your installation's /sites/bootstrap.php\r\n> file, do the following.\r\n>\r\n> Remove line 370:\r\n> if (HOSTED) $js_url = \"\r\n> https://brewingcompetitions.com/_bcoem_shared/js_includes/\";\r\n>\r\n> Remove line 373:\r\n> if (HOSTED) $images_url = \"\r\n> https://brewingcompetitions.com/_bcoem_shared/images/\";\r\n>\r\n> Remove line 376:\r\n> if (HOSTED) $css_url = \"https://brewingcompetitions.com/_bcoem_shared/css/\r\n> \";\r\n>\r\n> This is specific to 2.7.1.X, but for all other installations, remove any\r\n> full lines that have the URL https://brewingcompetitions.com (similar to\r\n> those above).\r\n>\r\n> —\r\n> Reply to this email directly, view it on GitHub\r\n> <https://github.com/geoffhumphrey/brewcompetitiononlineentry/issues/1609#issuecomment-3058156741>,\r\n> or unsubscribe\r\n> <https://github.com/notifications/unsubscribe-auth/BJRDIASVGKGGYMPFVT7NDTL3H2IUXAVCNFSM6AAAAAB6LFZ42WVHI2DSMVQWIX3LMV43OSLTON2WKQ3PNVWWK3TUHMZTANJYGE2TMNZUGE>\r\n> .\r\n> You are receiving this because you authored the thread.Message ID:\r\n> ***@***.***\r\n> com>\r\n>\r\n"
+      },
+      {
+        "author": "WaterWolf12345",
+        "body": "I'm coming late to this as we haven't had a competition since June last year. It looks like our host installed/upgraded Imunify last October and we have been having the same issue with our 2.7.2.1 installation. Before I knew there was an open issue for this, I investigated myself and fixed it by changing the line in bootstrap.php:\n\n'contestHostWebsite' => 'http://www.brewingcompetitions.com',\nto\n'contestHostWebsite' => NULL,\n\nThis is how the line is in version 3.0.0.0 anyway. I don't know what Imunify has against this web address!\n\n"
+      }
+    ]
+  },
+  {
+    "id": 1604,
+    "title": "2.7.2 (e) - Entry Logs",
+    "url": "https://github.com/geoffhumphrey/brewcompetitiononlineentry/issues/1604",
+    "author": "003401E8",
+    "body": "Is there a way to view more in-depth logs on the hosted version such as:\n\n1. entry/entries deleted by a user but were paid for\n2. entry/entries transferred from one paid entrant to another entrant\n\nIn trying to reconcile PayPal issues, having the ability to view these logs would be great for auditing purposes. ",
+    "comments": [
+      {
+        "author": "geoffhumphrey",
+        "body": "Unfortunately, there are not any logs that record those types of transactions. The only option I can think of would be to check PayPal's transaction records. "
+      },
+      {
+        "author": "AdrienM76",
+        "body": "We had some similar issues this year matching up payments. Having a log, or otherwise preserving the original entry date would be helpful. Even better would be for the PayPal transaction ID to be recorded as part of the entry data. Being able to see which payments match up to which entries would make auditing a snap. Additionally, being able to see a list of 'withdrawn' entries would be nice, especially if they were already paid. Finally, automatically preserving the date of when entries were checked in as received would be nice too. (same for manually marking as 'paid') We're having to enter that info manually in the admin notes and it is a bit tedious."
+      }
+    ]
+  },
+  {
+    "id": 1450,
+    "title": "Some entries aren't available for judging when marked as paid and received",
+    "url": "https://github.com/geoffhumphrey/brewcompetitiononlineentry/issues/1450",
+    "author": "SWBSAV",
+    "body": "**Verify the Following**\r\nReporting About the Latest Version? Yes\r\n*If you are not running the most current version in your environment, please update prior to reporting your bug. Your issue may have already been addressed.*\r\n\r\nSearched Issue Reports for Bug? Yes or No\r\n*Please search open *and* closed issues for issues similar to yours. Your bug may already have a posted solution.*\r\n\r\nReviewed the Good To Know Issue Reports? Yes or No\r\n*Please review the Issue reports that are labeled Good to Know. Find one and click on the label to view them all.*\r\n\r\n**BCOE&M Info**\r\nVersion: \r\nInstallation URL: \r\nHosted Installation? Yes or No\r\n\r\n**Describe the Bug**\r\nSeveral entries are not listed in the judging round for our competition.  They are marked as paid and received but they will not show as available to judge on pullsheets\r\n\r\n**To Reproduce**\r\nSteps to reproduce the behavior:\r\n1. Go to 'Organizing'\r\n2. Click on 'Manage' under 'Tables'\r\n3. Go to Define All Flights and click on wither table 2 or 3\r\n4. Not all entries on these tables are listed in the round (we only have 1 round)\r\n\r\n**Expected Behavior**\r\nI expect all entries to be available to a round if they are paid and received.\r\n\r\n**Screenshots**\r\nIf applicable, add screenshots to help explain your problem.\r\n\r\n**Server Environment**\r\nHosted Version\r\n\r\n**Local Environment**\r\nN/A\r\n\r\n**Additional Context**\r\nWe also provided a discount code to bring entry to\r\n![Screenshot 2023-08-19 091016](https://github.com/geoffhumphrey/brewcompetitiononlineentry/assets/95771253/90fcbbf2-0f7a-4083-bda0-ab089211fdae)\r\ntals to 0.00.  However, it would never mark the entries as paid.  Could this be related?",
+    "comments": [
+      {
+        "author": "AdrienM76",
+        "body": "I'm not sure if this is a bug, or intended behavior (or expected behavior) but the solution is to repeat \"Step 4: Assign Flights to Rounds\". I had some entries that weren't even showing up with the radio button active and realized they were entered after I had already done Step 3 & 4 a few days ago. I simply needed to click the radio buttons for those entries, update, and then repeat Step 4 for them to show up as being assigned to a round. (note, this is in Table Planning Mode)"
+      },
+      {
+        "author": "SWBSAV",
+        "body": "Thanks.  I figured it out but it wasn’t too far off.  I had not added the\r\nflights to rounds.  Once I did that they appeared on the pull sheet.\r\n\r\nOn Sun, Aug 20, 2023 at 4:31 PM Adrien ***@***.***> wrote:\r\n\r\n> I'm not sure if this is a bug, or intended behavior (or expected behavior)\r\n> but the solution is to repeat \"Step 4: Assign Flights to Rounds\". I had\r\n> some entries that weren't even showing up with the radio button active and\r\n> realized they were entered after I had already done Step 3 & 4 a few days\r\n> ago. I simply needed to click the radio buttons for those entries, update,\r\n> and then repeat Step 4 for them to show up as being assigned to a round.\r\n> (note, this is in Table Planning Mode)\r\n>\r\n> —\r\n> Reply to this email directly, view it on GitHub\r\n> <https://github.com/geoffhumphrey/brewcompetitiononlineentry/issues/1450#issuecomment-1685391214>,\r\n> or unsubscribe\r\n> <https://github.com/notifications/unsubscribe-auth/AW2VU5PDHXNGILL5O6EGTSDXWJXYRANCNFSM6AAAAAA3WSNRHU>\r\n> .\r\n> You are receiving this because you authored the thread.Message ID:\r\n> ***@***.***\r\n> com>\r\n>\r\n"
+      }
+    ]
+  },
+  {
+    "id": 1416,
+    "title": "Paypal fees not registering in the system",
+    "url": "https://github.com/geoffhumphrey/brewcompetitiononlineentry/issues/1416",
+    "author": "jeffrey-simonds",
+    "body": "Version: 2.5.0 (e)\r\n\r\n\r\nInstallation URL: https://masherscomp.com/\r\n\r\n\r\nIs your installation hosted on brewcompetition.com or brewcomp.com? No\r\n\r\n\r\nDescription of Issue: An entrant paid their dues using PayPal but the system did not mark their entries as paid. This also happened to me when I paid for a separate competition, awog.brewcompetition.com. We can cross check our PayPal receipts but is there a fix for this issue at all?\r\n\r\n\r\n\r\nFor enhancements, please prepend \"Enhancement - \" to the title. For issues/bugs, please prepend the BCOE&M version number the title.\r\n",
+    "comments": [
+      {
+        "author": "geoffhumphrey",
+        "body": "Hi @jeffrey-simonds - unfortunately, this is a human-related issue and not a system-related one. Please [see this issue report](https://github.com/geoffhumphrey/brewcompetitiononlineentry/issues/1345) for an explanation..."
+      }
+    ]
+  },
+  {
+    "id": 1375,
+    "title": "Judging number vs entry number?",
+    "url": "https://github.com/geoffhumphrey/brewcompetitiononlineentry/issues/1375",
+    "author": "woottonn",
+    "body": "Version: Latest\r\n\r\n\r\nInstallation URL: https://hearthbc.co.uk/\r\n\r\n\r\nIs your installation hosted on brewcompetition.com or brewcomp.com? Selfhosted\r\n\r\n\r\nDescription of Issue: When we go to print the pullsheet, the only thing that is listed is x and a random number, presuming this is a judging number? How do we go about tallying this up to the entry number? Or am I being thick? (Likely)\r\n",
+    "comments": [
+      {
+        "author": "grmelacz",
+        "body": "That is easy thing to do. Once you have your samples registered, just use the Regenerate -> Judging Numbers (Same as Entry Numbers) function. That way, everything will show the entry numbers instead.\r\n\r\n<img width=\"775\" alt=\"Screenshot 2022-11-26 at 20 15 09\" src=\"https://user-images.githubusercontent.com/41264018/204105502-80f1f0cc-2ee4-4a91-9a6b-b09a1267d717.png\">\r\n"
+      }
+    ]
+  },
+  {
+    "id": 1353,
+    "title": "Enhancement: Cup Labels",
+    "url": "https://github.com/geoffhumphrey/brewcompetitiononlineentry/issues/1353",
+    "author": "kmeintsma",
+    "body": "Some competitions have moved to a double blind format for judging.\r\n\r\nTo make this possible and reduce errors, having the entry information printed on a label that can be put on the cups is very helpful.\r\n\r\nThe current software version only permits this for BOS.\r\n\r\nIf it could be added for normal flights/rounds and mini-bos as well it would be a big help.",
+    "comments": [
+      {
+        "author": "geoffhumphrey",
+        "body": "Hi @kmeintsma,\r\n\r\nLabels for all entries can be created now by using downloaded data and mail merging into [MS Word](https://support.microsoft.com/en-us/office/use-mail-merge-for-bulk-email-letters-labels-and-envelopes-f488ed5b-b849-4c11-9cff-932c49474705) or [Google Docs](https://www.gmass.co/blog/mail-merge-google-docs/).\r\n\r\nFirst go to Admin > Data Exports > Entries and Associated Data > All Entries: Limited Data CSV in your BCOEM installation.\r\n\r\nOpen the CSV in Excel or Google Sheets and remove all of the extraneous data, [like in this example](https://github.com/geoffhumphrey/brewcompetitiononlineentry/files/9668048/Example_BCOEM_Entries_Mail_Merge.csv), leaving the entry or judging number (depending upon what you're using), category, and required info in place. Then, you could sort by category number, save as a CSV, and then perform a Mail Merge in MS Word or Google Docs to produce labels that can be adhered to individual cups. "
+      },
+      {
+        "author": "kmeintsma",
+        "body": "While it's correct that labels can be created through a data dump and mail merge, the idea for this enhancement is to reduce the workload and decrease the time it takes to get things done. This is particularly important during mini-bos and bos activities because you can't prepare for this in advance.\r\n\r\nHaving the option just to generate a list of the mini-bos entries by category would be a big help.\r\n\r\nIf I'm the only customer that want's the enhancement it's probably not worthwhile. I'll keep sending suggestions as I run into problems to be solved."
+      },
+      {
+        "author": "geoffhumphrey",
+        "body": "There is an option that I totally spaced out until today. Under Admin > Entry Sorting > Print Bottle Labels, there is a download called _With Required Info - All Styles_ (entry or judging numbers) - this prints 1-8 labels per entry on 5160/3422 stock of ALL entries in the system. \r\n\r\nAt present the report is broken down by style in ascending order. It's not broken down by table/flight and there's no option for mini-BOS. Hopefully that is what you're looking for - or at least close to it.\r\n\r\nIt looks like this (example has 3 labels per entry):\r\n![image](https://user-images.githubusercontent.com/5216502/196003927-1a0b8e4c-2abe-43e8-b5d1-fdf18abd61bd.png)\r\n---- /// ----\r\n![image](https://user-images.githubusercontent.com/5216502/196003999-ffadc2a6-809a-4b3a-bcfe-0f6adee7ea65.png)\r\n\r\n"
+      }
+    ]
+  },
+  {
+    "id": 1345,
+    "title": "Version 2.2.0: Payments Not Being Recorded as Paid in System",
+    "url": "https://github.com/geoffhumphrey/brewcompetitiononlineentry/issues/1345",
+    "author": "terryn7731",
+    "body": "**Verify the Following**\r\nReporting About the Latest Version? Yes or No\r\n*If you are not running the most current version in your environment, please update prior to reporting your bug. Your issue may have already been addressed.*\r\n\r\nSearched Issue Reports for Bug? Yes \r\n\r\n**BCOE&M Info**\r\nVersion: 2.2.0\r\nInstallation URL: kotmlmhba.org\r\nHosted Installation? No\r\n\r\n**Describe the Bug**\r\nWe had 5 entrants that has issues with paypal not posting back correctly that the payment was made. Their entries were still marked as unpaid on the contest site but checking our paypal account it showed the payment as received. \r\n\r\n**To Reproduce**\r\nUnfortunately I don't have any specific information on what they did to create this issue. The bulk of the entrants had not problems at all. ",
+    "comments": [
+      {
+        "author": "geoffhumphrey",
+        "body": "Hi @terryn7731 - unfortunately, this is probably a case where reliance on human intervention results in unexpected results. If your installation ISN'T using the PayPal IPN option, you are relying on entrants clicking the \"Return to merchant...\" link on the PayPal payment confirmation screen. If they don't, the associated entries \"paid\" status will not be updated.\r\n\r\nSee Issue #918 for more if this is the case.\r\n\r\nIf you DO have PayPal IPN implemented on your installation, I would check your configuration. See Issue #1127 and https://brewcompetition.com/paypal-ipn for more information."
+      }
+    ]
+  },
+  {
+    "id": 1343,
+    "title": "Version 2.4.0(e) - Splitting a Sub-Style at Tables; Adding Judging Sessions After Registration Begins",
+    "url": "https://github.com/geoffhumphrey/brewcompetitiononlineentry/issues/1343",
+    "author": "kmeintsma",
+    "body": "I have a more detailed question and can't find anything in the software or in the help system to answer it.\r\n\r\nQuestion 1:\r\nI have a large category (multiple actually) that I want to split into two categories by sweetness for both judging and awards. How can I do this?\r\n\r\nIt's simple enough to create flights for a table that would be separated by sweetness if I look at the entry information although it's extra work. But awards are reported by table correct? I can't create extra tables as far as I can tell and then assign flights to them based on the characteristics I'm targeting.\r\n\r\nQuestion 2:\r\nI've added some additional judging sessions. When I try to assign judges to a table by session, the software will NOT allow me to select the judges I need. I presume it's because they didn't sign up for the session due to it being created after signups were done. Is there a way around this? I really don't want to go into each judge profile and force select them into a new judging session.\r\n",
+    "comments": [
+      {
+        "author": "geoffhumphrey",
+        "body": "Hi @kmeintsma - hopefully the following will answer your questions.\r\n\r\n**Question 1**\r\nYou can spilt into flights like you described. And yes, awards are by table. If you want to have awards for the differing levels of sweetness within a sub-category, my advice would be to:\r\n1. Create a custom \"style\" for each level of sweetness.\r\n2. Reassign the affected entries to the appropriate custom style.\r\n3. Create a judging table for each level of sweetness.\r\n\r\nThis way, you'll have medal categories for each.\r\n\r\n**Question 2**\r\nCorrect. There are a couple of approaches around this.\r\n1. Send a mass email to all judges informing of the newly created judging session(s) and requesting that they update their availability via the Edit My Account function.\r\n2. Just like you mentioned - edit the accounts of those judges whom you know are available yourself as the Admin. \r\n\r\nNot allowing judges to be assigned to sessions where they're explicitly unavailable is a failsafe in the system.\r\n\r\nCheers!"
+      },
+      {
+        "author": "kmeintsma",
+        "body": "The difficulty with creating a custom style AFTER all entries are in the system is that there is no good way to reassign the desired entries.  *If there is, I would like to hear about it.*\r\n\r\nTo the best of my knowledge it requires me to go into each person's profile and explicitly move the entry to the new category/style. When I have tried this in the past, it ALSO removed the entry name, all of the carb/sweetness and optional information. This is not a practical approach with 400 entries.\r\n\r\nMead competitions from an informational/category standpoint are very different from beer. We have all sorts or information that needs to stay with the entry, and we need that information available to the judges as well. With beer, it's pretty straight forward, there are few substyles that have optional/added ingredients.\r\n\r\nThe comps that are well mananged are gradually moving to a totally blind presentation. In this case, we have stewards pouring for the judges and delivering cups to the judging table. This permits us (again especially for mead) to accept odd bottle formats. To facilitate this approach and minimize mistakes, we put labels on the cups - similar to the BOS labels\r\nyou generate in the system. Sadly, this facility is not available for anything other than BOS. Having placemats available would be a nice addition as well.\r\n\r\nI've dumped and massaged the data, and I've written a script to concatenate the data into a label format that can be printed, but it would be great to have the system provide labels as needed. Something for the future perhaps.\r\n\r\nAdding judges to a new session is time consuming, but there are few enough of them that it's reasonably easy to do.\r\n\r\nI have a list of other issues/bugs we've encountered and I'll send them along after the competition is finished.\r\n\r\nThanks!\r\nKevin"
+      },
+      {
+        "author": "kmeintsma",
+        "body": "Incidentally, I just tested moving entries from one style to another just\nto make sure you had not made changes since the last time I tried this.\n\nWhen the style is changed to the new style, ALL of the data is wiped out.\n\nThere is simply no way I can manually type in all of the information for\neach entry in order to move them.\n\nThanks,\nKevin\n\nOn Wed, Sep 7, 2022 at 1:18 PM Kevin Meintsma ***@***.***>\nwrote:\n\n> The difficulty with creating a custom style AFTER all entries are in the\n> system is that there is no good way to reassign the desired entries.\n> * If there is, I would like to hear about it. *\n>\n> *To the best of my knowledge it requires me to go into each person's\n> profile and explicitly move the entry to the new category/style. When I\n> have tried this in the past, it ALSO removed the entry name, all of the\n> carb/sweetness and optional information. This is not a practical approach\n> with 400 entries.*\n>\n> Mead competitions from an informational/category standpoint are very\n> different from beer. We have all sorts or information that needs to stay\n> with the entry, and we need that information available to the judges as\n> well. With beer, it's pretty straight forward, there are few substyles that\n> have optional/added ingredients.\n>\n> The comps that are well mananged are gradually moving to a totally blind\n> presentation. In this case, we have stewards pouring for the judges and\n> delivering cups to the judging table. This permits us (again especially for\n> mead) to accept odd bottle formats. To facilitate this approach and\n> minimize mistakes, we put labels on the cups - similar to the BOS labels\n> you generate in the system. Sadly, this facility is not available for\n> anything other than BOS. Having placemats available would be a nice\n> addition as well.\n>\n> I've dumped and massaged the data, and I've written a script to\n> concatenate the data into a label format that can be printed, but it would\n> be great to have the system provide labels as needed. Something for the\n> future perhaps.\n>\n> Adding judges to a new session is time consuming, but there are few enough\n> of them that it's reasonably easy to do.\n>\n> I have a list of other issues/bugs we've encountered and I'll send them\n> along after the competition is finished.\n>\n> Thanks!\n> Kevin\n>\n> On Wed, Sep 7, 2022 at 12:13 PM Geoff Humphrey ***@***.***>\n> wrote:\n>\n>> Hi @kmeintsma <https://github.com/kmeintsma> - hopefully the following\n>> will answer your questions.\n>>\n>> *Question 1*\n>> You can spilt into flights like you described. And yes, awards are by\n>> table. If you want to have awards for the differing levels of sweetness\n>> within a sub-category, my advice would be to:\n>>\n>>    1. Create a custom \"style\" for each level of sweetness.\n>>    2. Reassign the affected entries to the appropriate custom style.\n>>    3. Create a judging table for each level of sweetness.\n>>\n>> This way, you'll have medal categories for each.\n>>\n>> *Question 2*\n>> Correct. There are a couple of approaches around this.\n>>\n>>    1. Send a mass email to all judges informing of the newly created\n>>    judging session(s) and requesting that they update their availability via\n>>    the Edit My Account function.\n>>    2. Just like you mentioned - edit the accounts of those judges whom\n>>    you know are available yourself as the Admin.\n>>\n>> Not allowing judges to be assigned to sessions where they're explicitly\n>> unavailable is a failsafe in the system.\n>>\n>> Cheers!\n>>\n>> —\n>> Reply to this email directly, view it on GitHub\n>> <https://github.com/geoffhumphrey/brewcompetitiononlineentry/issues/1343#issuecomment-1239664891>,\n>> or unsubscribe\n>> <https://github.com/notifications/unsubscribe-auth/AVMAHPLA2HLHEIP3K7VPZY3V5DEM7ANCNFSM6AAAAAAQEBI5ME>\n>> .\n>> You are receiving this because you were mentioned.Message ID:\n>> ***@***.***\n>> com>\n>>\n>\n"
+      },
+      {
+        "author": "geoffhumphrey",
+        "body": "This is true and by design, but you do have a good point - Admins should be able to change the style of a given entry if they feel it has been classified incorrectly **without** having to copy/paste required information that was provided by the entrant. \r\n\r\nEDIT: Disabling the data wipe upon change of style for Admins will be pretty easy to do and will be incorporated into the next version."
+      }
+    ]
+  },
+  {
+    "id": 1332,
+    "title": "2.4.0.3 Entered Tables Planning Mode while registration still open",
+    "url": "https://github.com/geoffhumphrey/brewcompetitiononlineentry/issues/1332",
+    "author": "Sylvr000",
+    "body": "Version:\r\n2.4.0.3\r\n\r\nInstallation URL:\r\nhttps://wortapalooza.clubwort.net/\r\n\r\nIs your installation hosted on brewcompetition.com or brewcomp.com?\r\nNo\r\n\r\nDescription of Issue:\r\nHopefully not an issue, we entered Tables Planning Mode while registration is still open.\r\n1) Is this a problem?\r\n2) If so, how would we go back to the previous mode?\r\nThank you!\r\n\r\nFor enhancements, please prepend \"Enhancement - \" to the title. For issues/bugs, please prepend the BCOE&M version number the title.\r\n",
+    "comments": [
+      {
+        "author": "geoffhumphrey",
+        "body": "Hi Jim - no, this isn't a problem. If your entry window is still open, I would hold off trying to plan your tables configurations until it closes. \r\n\r\nIf that isn't possible, or if you'd like to get a jump on things, there's no harm in planning your tables while actively accepting entries - the only risk is that your entry counts per table may be inaccurate. If you do go that route, my advice would be edit _each_ table _after_ your entry window closes to make sure you've accurately captured all entry styles and their associated counts. \r\n\r\nOnce you've sorted and marked entries as received, you can then switch back to Tables Competition Mode. To go back to Tables Competition Mode, go to Admin > Organizing > Manage Tables. Then, simply select the \"Switch to Tables Competition Mode\" button near the top."
+      }
+    ]
+  },
+  {
+    "id": 1323,
+    "title": "Version 2.4.0: Cannot find way to publish all results with scores publicly on site",
+    "url": "https://github.com/geoffhumphrey/brewcompetitiononlineentry/issues/1323",
+    "author": "cgspeck",
+    "body": "**Verify the Following**\r\n\r\nReporting About the Latest Version? Yes\r\nSearched Issue Reports for Bug? Yes\r\n\r\n**BCOE&M Info**\r\n\r\nVersion: 2.4.0\r\nInstallation URL:  https://comps.westgatebrewers.org/\r\nHosted Installation? No\r\n\r\n**Description**\r\n\r\nWe used your software to run our club's competition last weekend.\r\n\r\nAfter entering scores, setting places and publishing results I've had multiple people asking for a full results list, grouped by category, sorted in descending score order.\r\n\r\nThis is a standard document which most Australian clubs make publicly available so entrants know how they ranked in the overall competition.\r\n\r\nThe \"All with Scores\" report from the admin would be perfect for this purpose, but it appears that you must be an admin to view this URL.\r\n\r\nI cannot find any option to make it available, nor public link which I can share. \r\n\r\nCould you advise how to proceed?\r\n\r\n**To Reproduce**\r\n\r\nSteps to reproduce the behavior:\r\n1. Run a competition\r\n2. Publish results\r\n\r\n**Expected Behavior**\r\n\r\nA link on the homepage to report with all results by category sorted by score.\r\n",
+    "comments": [
+      {
+        "author": "geoffhumphrey",
+        "body": "Hi @cgspeck, if you'd like to make the _All with Scores_ report available to all entrants, you could access that report and print it to PDF via Chrome or other browser. Then, using the scoresheet upload feature, upload it to your installation's /user_docs/ (or upload it to another directory on your server, Google Docs, Dropbox, etc.). Then, you could employ a simple HTML custom module. For example, you could customize the code in the /mods/sidebar_top_example.php file to be something like:\r\n```\r\n<div class=\"panel panel-info\">\r\n\t<div class=\"panel-heading\">\r\n\t\t<h4 class=\"panel-title\">Full Results List</h4>\r\n\t</div>\r\n\t<div class=\"panel-body\">\r\n    \t        <p>Download the <a href=\"[your link]\" target=\"_blank\">full results list with scores here</a>.</p>\r\n\t</div>\r\n</div>\r\n```\r\nSave it as a PHP file, upload it to the /mods/ directory of your BCOE&M installation, and then add it as a custom module by going to Admin > Preferences/Customization > Custom Modules > Add. As far as settings, I would choose:\r\n- Permission: All\r\n- Extends Core Function: Home Page\r\n- Rank: 1\r\n- Display Order: Before Public Sidebar Content\r\n\r\nThat'll work with the current configuration of the software - at least immediately."
+      },
+      {
+        "author": "geoffhumphrey",
+        "body": "LOL. I just clicked the link to your installation - looks like you're using a custom module similar to the one I outlined above. I guess I'm a little late to the party."
+      },
+      {
+        "author": "cgspeck",
+        "body": "Thanks @geoffhumphrey. I was under the pump to get the results out so played around with an upload and the top module example until it worked. I still think publically exposing a pre-compiled PDF of results is a sensible feature to have though."
+      }
+    ]
+  },
+  {
+    "id": 1322,
+    "title": "Enhancement: Load AABC 2022 guidelines into current prod version",
+    "url": "https://github.com/geoffhumphrey/brewcompetitiononlineentry/issues/1322",
+    "author": "rocket-pants",
+    "body": "**Is your enhancement or feature request related to a problem? Please describe.**\r\nRunning Australian comps this years needs to align with the new AABC guidelines. I'm not keen on upgrading to 2.5 yet given the beta status.\r\n\r\n**Describe the solution you'd like**\r\nLoad AABC 2022 guidelines into v2.4 (or 2.4.1 I guess) or provide the steps to do so via phpmyadmin\r\n\r\n**Describe alternatives you've considered**\r\nCustom categories and styles don't really work that well when adding a large number of new styles\r\n\r\n**Additional context**\r\nPlease help :)\r\n",
+    "comments": [
+      {
+        "author": "geoffhumphrey",
+        "body": "Hi @rocket-pants - try the following to integrate the 2022 AABC styles into version 2.4.0:\r\n- Download this archive and unzip it: [v240_AABC2022.zip](https://github.com/geoffhumphrey/brewcompetitiononlineentry/files/9137156/v240_AABC2022.zip)\r\n- Using phpMyAdmin, import the **AABC2022_styles.sql** file into your BCOE&M database\r\n  - **If you use a prefix for your tables**, make sure to change the `style` table name in the INSERT INTO statement on line 14 of the file to incorporate your prefix, like so...\r\n`` INSERT INTO `prefix_styles` ``\r\n- Upload the **styles.inc.php** file in the zip to your BCOE&M installation's **/includes/ directory** - replace the one that is there.\r\n- Fire up your BCOE&M installation, log in as an Admin, and:\r\n  - Go to Admin > Preferences > Site Preferences and change your Style Set to AABC 2022\r\n  - Go to Admin > Competition Preparation > Styles Accepted and select all of the styles you'd like to accept for your competition.\r\n\r\nOf course, please do so in a test environment prior to deploying on a production installation. \r\n\r\nPlease note, I have NOT tested this as yet with any other functions other than adding/editing entries. Off the top of my head, the functions that would be most impacted are creating and editing Tables (Admin > Organizing > Tables > Manage), some reports, and data exports.\r\n\r\nComment here if you have any issues."
+      },
+      {
+        "author": "rocket-pants",
+        "body": "Hi Geoff,  thanks for the quick response. This is just awesome The changes seem to be working well with one exception - the style guidelines do not appear to be complete.\r\n\r\nI have the list of category 1 styles as shown in the image below. The sql statement you've provided me only has\r\n0101\r\n0103\r\n0105\r\n0106\r\n0110\r\n\r\nI'm not sure if this is the same in 2.5.0 but would require fixing\r\n\r\n![image](https://user-images.githubusercontent.com/21966616/179680326-66bf27a6-d39e-4ed7-83c4-6a0463b3f8ca.png)\r\n"
+      },
+      {
+        "author": "rocket-pants",
+        "body": "A couple of other little things\r\n\r\n- There are two 13.4 entries in the sql provided. The American wheat style needs to be changed to 13.3\r\n- I coalesced all the Specialty IPAs (category 7) into a single style 7.2. This aligns with the AABC competition requirements where a participant can only have one entry per style (e.g. 1 Red IPA or 1 Black IPA but not both). I made the others inactive so I can change it if AABC changes their requirements.\r\n\r\nThanks again for this. You've saved the West Australian state comp :)"
+      },
+      {
+        "author": "geoffhumphrey",
+        "body": "Glad I could help! I'll take a look at the 2.5.0 coding and make sure that the Cat 1 styles are in there, as well as fix the Cat 13 error."
+      },
+      {
+        "author": "geoffhumphrey",
+        "body": "Here's an _updated_ zip archive with the missing Category 1 styles and the corrected American Wheat subcategory number. I did not make the Specialty IPA changes detailed by @rocket-pants, however. Those can be made on a case-by-case basis.\r\n\r\n[v240_AABC2022.zip](https://github.com/geoffhumphrey/brewcompetitiononlineentry/files/9143070/v240_AABC2022.zip)\r\n\r\n"
+      }
+    ]
+  },
+  {
+    "id": 1311,
+    "title": "Informational: PayPal IPN Emails",
+    "url": "https://github.com/geoffhumphrey/brewcompetitiononlineentry/issues/1311",
+    "author": "jimmyorkin",
+    "body": "Version: 2.1.13\r\n\r\n\r\nInstallation URL:\r\n\r\n\r\nIs your installation hosted on brewcompetition.com or brewcomp.com? No\r\n\r\n\r\nDescription of Issue: I saw a strange error with our email deliver provider, Mailgun, where emails were failing to be delivered. After investigation this is what I found.\r\n\r\nOur Club uses PayPal for BCOEM and to take member dues and raffle money, IPN sends notifications for any PayPal event and BCOEM sees them. In this case our treasurer was taking dues payments. When the IPN message got to BCOEM, which is displaying the results of the last competition state, BCOEM tried to send emails about the transactions. these emails were not deliverable.\r\n\r\nWe probably should turn off IPN in the off season. I don't know if any fix is needed in BCOEM. Something to be aware of.\r\n\r\nThe BCOEM version is old. It will be updated before the next competition.\r\n\r\nJimmy\r\n\r\nFor enhancements, please prepend \"Enhancement - \" to the title. For issues/bugs, please prepend the BCOE&M version number the title.\r\n",
+    "comments": [
+      {
+        "author": "raybilyk",
+        "body": "@jimmyorkin - When you say '...turn off IPN in the off season...', are you referring to disabling it in BCOEM?"
+      },
+      {
+        "author": "jimmyorkin",
+        "body": "@raybilyk Turn IPN off in PayPay. In the settings for IPN in PayPal, there is an option to disable it."
+      },
+      {
+        "author": "raybilyk",
+        "body": "Thank you!\n\nOn Mon, Sep 19, 2022, 5:45 PM jimmyorkin ***@***.***> wrote:\n\n> @raybilyk <https://github.com/raybilyk> Turn IPN off in PayPay. In the\n> settings for IPN in PayPal, there is an option to disable it.\n>\n> —\n> Reply to this email directly, view it on GitHub\n> <https://github.com/geoffhumphrey/brewcompetitiononlineentry/issues/1311#issuecomment-1251594669>,\n> or unsubscribe\n> <https://github.com/notifications/unsubscribe-auth/AINKQ5D62REF7Q47MMNXNOTV7DNGJANCNFSM5V5V3WWQ>\n> .\n> You are receiving this because you were mentioned.Message ID:\n> ***@***.***\n> com>\n>\n"
+      }
+    ]
+  },
+  {
+    "id": 1230,
+    "title": "When using Table Planning Mode, Pull Sheets are Not Available",
+    "url": "https://github.com/geoffhumphrey/brewcompetitiononlineentry/issues/1230",
+    "author": "kmeintsma",
+    "body": "Version: 2.2.0\r\n\r\n\r\nInstallation URL:\r\nhttps://comp.valkyrieshorn.com\r\n\r\nIs your installation hosted on brewcompetition.com or brewcomp.com?\r\nNo\r\n\r\nDescription of Issue:\r\nPull Sheets are not available when using Distributed Judging.\r\n\r\n\r\nFor enhancements, please prepend \"Enhancement - \" to the title. For issues/bugs, please prepend the BCOE&M version number the title.\r\n",
+    "comments": [
+      {
+        "author": "geoffhumphrey",
+        "body": "Hi @kmeintsma; I'm not able to replicate this issue. \r\n\r\nIn my test environments, I was able to download pullsheets via Admin > Organizing > Tables by clicking on the printer icon:\r\n![image](https://user-images.githubusercontent.com/5216502/131181356-1017cbc1-ed9a-4e3c-8154-8722614b393d.png)\r\n\r\nAlso, I was able to download via Admin > Reports > Pullsheets\r\n![image](https://user-images.githubusercontent.com/5216502/131181492-a0be016a-520d-4282-be91-752c603625dd.png)\r\n\r\nCould you provide some screenshots and/or more information as to what you're seeing?"
+      },
+      {
+        "author": "kmeintsma",
+        "body": " I've worked around the issue (and yes I can easily replicate it). I need\nto distribute meads to the judges tomorrow so I will have to get back to\nyou with more detail on another day as long as I have a working solution\n(not enough time to do both). THANK YOU for the quick response - that is\nquite reassuring.\n\nMy solution was to switch back to the old style table planning mode, which\nthen added several menu choices for reports which are not present in\ndistributed judging mode.\n\nPerhaps that's enough for you to work with. If not, I'll forward some\ndetail next week.\n\nIf Dave (my tech guy) has not made a donation on our behalf I will ensure\nthat one is forthcoming. Thanks for a very helpful piece of software, it\nwould be so much more difficult to manage a sizable competition without it.\n\nKevin Meintsma\nOrganizer - Valkyries Horn Mead Competition\n\nOn Fri, Aug 27, 2021 at 2:52 PM Geoff Humphrey ***@***.***>\nwrote:\n\n> Hi @kmeintsma <https://github.com/kmeintsma>; I'm not able to replicate\n> this issue.\n>\n> In my test environments, I was able to download pullsheets via Admin >\n> Organizing > Tables by clicking on the printer icon:\n> [image: image]\n> <https://user-images.githubusercontent.com/5216502/131181356-1017cbc1-ed9a-4e3c-8154-8722614b393d.png>\n>\n> Also, I was able to download via Admin > Reports > Pullsheets\n> [image: image]\n> <https://user-images.githubusercontent.com/5216502/131181492-a0be016a-520d-4282-be91-752c603625dd.png>\n>\n> Could you provide some screenshots and/or more information as to what\n> you're seeing?\n>\n> —\n> You are receiving this because you were mentioned.\n> Reply to this email directly, view it on GitHub\n> <https://github.com/geoffhumphrey/brewcompetitiononlineentry/issues/1230#issuecomment-907440119>,\n> or unsubscribe\n> <https://github.com/notifications/unsubscribe-auth/AVMAHPLAJ4MJ4Q43YZADAJLT67UIHANCNFSM5C53CKEQ>\n> .\n> Triage notifications on the go with GitHub Mobile for iOS\n> <https://apps.apple.com/app/apple-store/id1477376905?ct=notification-email&mt=8&pt=524675>\n> or Android\n> <https://play.google.com/store/apps/details?id=com.github.android&referrer=utm_campaign%3Dnotification-email%26utm_medium%3Demail%26utm_source%3Dgithub>.\n>\n>\n"
+      },
+      {
+        "author": "geoffhumphrey",
+        "body": "Hi Kevin. Indeed, pullsheets are **not** available when in Table Planning Mode - this is to prevent any confusion since pullsheets are only for entries that are _received, checked-in, and ready for judging_. Otherwise, stewards/staff/cellar people could possibly be chasing down ghosts. Simply switching to Tables Competition Mode, like you did, will provide the appropriate pullsheet icons/links - providing entries have been **marked as received** in the application."
+      },
+      {
+        "author": "kmeintsma",
+        "body": "I discovered accidentally that switching modes worked. However, I did not\nfind any documentation or help that would have provided the clue. If it's\nthere, I'm looking in the wrong place.\n\nI think part of my issue was that I had everything checked in, assigned and\nready to go, so the natural thing to do was to generate the pull sheets for\nthe next step.\n\nAt this point, I don't think I'll have any trouble remembering this for\nnext year.\n\nFrom an enhancement standpoint, one thing that would be nice is to have a\npagination option for the pull sheets - particularly for distributed\njudging. We created judge \"boxes\" which contained their flights and pull\nsheets, so I had to spend time breaking the pages out and then reprinting\npages that overlapped. Not a huge thing, but it would be nice to have.\n\nThanks for getting back to me.\nKevin\n\nOn Thu, Sep 2, 2021 at 10:13 AM Geoff Humphrey ***@***.***>\nwrote:\n\n> Hi Kevin. Indeed, pullsheets are *not* available when in Table Planning\n> Mode - this is to prevent any confusion since pullsheets are only for\n> entries that are *received, checked-in, and ready for judging*.\n> Otherwise, stewards/staff/cellar people could possibly be chasing down\n> ghosts. Simply switching to Tables Competition Mode, like you did, will\n> provide the appropriate pullsheet icons/links.\n>\n> —\n> You are receiving this because you were mentioned.\n> Reply to this email directly, view it on GitHub\n> <https://github.com/geoffhumphrey/brewcompetitiononlineentry/issues/1230#issuecomment-911794130>,\n> or unsubscribe\n> <https://github.com/notifications/unsubscribe-auth/AVMAHPI5TUTVHX7JS6BOUP3T76IC7ANCNFSM5C53CKEQ>\n> .\n> Triage notifications on the go with GitHub Mobile for iOS\n> <https://apps.apple.com/app/apple-store/id1477376905?ct=notification-email&mt=8&pt=524675>\n> or Android\n> <https://play.google.com/store/apps/details?id=com.github.android&referrer=utm_campaign%3Dnotification-email%26utm_medium%3Demail%26utm_source%3Dgithub>.\n>\n>\n"
+      },
+      {
+        "author": "geoffhumphrey",
+        "body": "> From an enhancement standpoint, one thing that would be nice is to have a pagination option for the pull sheets - particularly for distributed judging. We created judge \"boxes\" which contained their flights and pull sheets, so I had to spend time breaking the pages out and then reprinting pages that overlapped. Not a huge thing, but it would be nice to have.\r\n\r\n@kmeintsma, in the latest version, 2.3.2, there is now a report called \"Judge Inventories\" created just for this purpose. Hopefully it will help out for your competition iteration."
+      }
+    ]
+  },
+  {
+    "id": 1215,
+    "title": "How do I see what judging sessions judges have signed up for before they are sorted to tables",
+    "url": "https://github.com/geoffhumphrey/brewcompetitiononlineentry/issues/1215",
+    "author": "cgeerdts",
+    "body": "Version:\r\nNot sure\r\n\r\nInstallation URL:\r\n\r\nhttps://bellinghamhomebrewersguild.org/bestofthebay/\r\n\r\nIs your installation hosted on brewcompetition.com or brewcomp.com?\r\n\r\nbrewcompetition.com\r\n\r\nDescription of Issue:\r\n\r\nHow do I see what judging sessions judges have signed up for before they are sorted to tables?\r\n\r\nFor enhancements, please prepend \"Enhancement - \" to the title. For issues/bugs, please prepend the BCOE&M version number the title.\r\n",
+    "comments": [
+      {
+        "author": "geoffhumphrey",
+        "body": "Hi @cgeerdts. To see which locations/sessions your judges have indicated that they're available for, go to Admin Dashboard > Entries and Participants > Assign Judges. Their sessions are listed in the Preferences column - use the search feature to narrow down by session name. Or, you can download a CSV by going to Admin Dashboard > Data Exports > Email Addresses > Available Judges."
+      },
+      {
+        "author": "cgeerdts",
+        "body": "Thanks Geoff. I was able to pull them up in the excel spreadsheet\n\nOn Fri, Jul 2, 2021 at 8:59 AM Geoff Humphrey ***@***.***>\nwrote:\n\n> Hi @cgeerdts <https://github.com/cgeerdts>. To see which\n> locations/sessions your judges have indicated that they're available for,\n> go to Admin Dashboard > Entries and Participants > Assign Judges. Their\n> sessions are listed in the Preferences column - use the search feature to\n> narrow down by session name. Or, you can download a CSV by going to Admin\n> Dashboard > Data Exports > Email Addresses > Available Judges.\n>\n> —\n> You are receiving this because you were mentioned.\n> Reply to this email directly, view it on GitHub\n> <https://github.com/geoffhumphrey/brewcompetitiononlineentry/issues/1215#issuecomment-873100418>,\n> or unsubscribe\n> <https://github.com/notifications/unsubscribe-auth/AUVP6Q2MVJ6K3H4TNYZCXS3TVXO43ANCNFSM47RRZUVQ>\n> .\n>\n"
+      }
+    ]
+  },
+  {
+    "id": 1143,
+    "title": "Enhancement - Custom Judging Number ",
+    "url": "https://github.com/geoffhumphrey/brewcompetitiononlineentry/issues/1143",
+    "author": "afcdmc",
+    "body": "Version:\r\n\r\n\r\nInstallation URL:\r\n\r\n\r\nIs your installation hosted on brewcompetition.com or brewcomp.com?No\r\n\r\n\r\nDescription of Issue:\r\nHi, I am a new user of BCOE&M doing some tests.  Our HBC is a small one with not many entries per Style, the maximum maybe 20!! In the past competitions, we have used the Letters and numbers to sort the beers styles for judging! and example:  New England IPA will be NIPA01 for the first entry and so on..  Cream Ale will be CA05... You get the point! our stewards, not all the time are Homebrewers so they don't know any style number or anything and for them is easier to SEE the style abbreviation as a judging number than a hole of numbers!!  Can We get an option to set a Judging number with custom fields?  Or maybe instead of the style number an abbreviation of the style in a letter form?  Maybe when we select styles for the competition have a field to append a Judge Number Style Prefix.  This enchantment will be great for Our HBC to train the NON-beer/homebrewer stewards!!   Thanks!!\r\n\r\nafc\r\n\r\n\r\n\r\n\r\nFor enhancements, please prepend \"Enhancement - \" to the title. For issues/bugs, please prepend the BCOE&M version number the title.\r\n",
+    "comments": [
+      {
+        "author": "geoffhumphrey",
+        "body": "This is possible in versions later than (I believe) 2.1.10 via the Admin > Entries and Participants > Manage Entries screen. \r\n\r\nEach listed entry has a field available to customize its judging number up to 6 characters:\r\n\r\n![image](https://user-images.githubusercontent.com/5216502/75277077-97c99b00-57c4-11ea-9e9a-a4c4645856c9.png)\r\n\r\nMind you, this may be tedious for larger comps, but it does get you there.\r\n\r\nOtherwise, there are other judging number generation methods for all entries that you can trigger via the Admin Actions drop-down on the same screen (do so after your entry window closes):\r\n\r\n![image](https://user-images.githubusercontent.com/5216502/75277408-31914800-57c5-11ea-97d4-ca58f9df8576.png)\r\n"
+      }
+    ]
+  },
+  {
+    "id": 991,
+    "title": "Font Awesome needs to be in v4 releases.",
+    "url": "https://github.com/geoffhumphrey/brewcompetitiononlineentry/issues/991",
+    "author": "jimmyorkin",
+    "body": "Version: 2.1.14\r\n\r\n\r\nInstallation URL:\r\n\r\n\r\nIs your installation hosted on brewcompetition.com or brewcomp.com? No\r\n\r\n\r\nDescription of Issue: When loading libraries locally, Font-Awesome needs to be something in the V4 releases. I loaded the latest Awesome-Font and this filename has changed: font-awesome.min.css. There is no dash in V5. I edited load_local_libraries.inc.php to remove the dash and icons still did not work.\r\n\r\nI downloaded v4.5.0 of Awesome-Font (same as CDN) and and it works. Might want to call out something about v4 in the Load Libraries Locally info page.\r\n\r\n\r\n\r\nFor enhancements, please prepend \"Enhancement - \" to the title. For issues/bugs, please prepend the BCOE&M version number the title.\r\n",
+    "comments": [
+      {
+        "author": "geoffhumphrey",
+        "body": "Thanks for pointing this out. I've updated [the directions](https://www.brewcompetition.com/local-load)."
+      }
+    ]
+  },
+  {
+    "id": 982,
+    "title": "All entries numbers are 0000",
+    "url": "https://github.com/geoffhumphrey/brewcompetitiononlineentry/issues/982",
+    "author": "DesireeeKnott",
+    "body": "Version: 2.1.13\r\n\r\n\r\nInstallation URL: http://foamcup.us\r\n\r\n\r\nIs your installation hosted on brewcompetition.com or brewcomp.com? no\r\n\r\n\r\nDescription of Issue:\r\nWe had to move our site to a new server from a windows to linux platform in order to get the latest mySQL version. Now all entries since the move have an entry number of 0000\r\n\r\n\r\nFor enhancements, please prepend \"Enhancement - \" to the title. For issues/bugs, please prepend the BCOE&M version number the title.\r\n",
+    "comments": [
+      {
+        "author": "geoffhumphrey",
+        "body": "Hi Desiree,\r\n\r\nSounds like the mySQL auto increment wasn't initialized when you moved servers. You can make sure all mySQL DB tables in your competition DB have the id row set to AUTO_INCREMENT by running the following SQL commands (change the *baseline_* prefix to your db table's prefix or eliminate if no prefix on each) via phpMyAdmin or shell access:\r\n\r\n```\r\nALTER TABLE `baseline_archive` MODIFY `id` int(11) NOT NULL AUTO_INCREMENT;\r\nALTER TABLE `baseline_brewer` MODIFY `id` int(11) NOT NULL AUTO_INCREMENT;\r\nALTER TABLE `baseline_brewing` MODIFY `id` int(11) NOT NULL AUTO_INCREMENT;\r\nALTER TABLE `baseline_contacts` MODIFY `id` int(11) NOT NULL AUTO_INCREMENT;\r\nALTER TABLE `baseline_contest_info` MODIFY `id` int(11) NOT NULL AUTO_INCREMENT;\r\nALTER TABLE `baseline_drop_off` MODIFY `id` int(11) NOT NULL AUTO_INCREMENT;\r\nALTER TABLE `baseline_judging_assignments` MODIFY `id` int(11) NOT NULL AUTO_INCREMENT;\r\nALTER TABLE `baseline_judging_flights` MODIFY `id` int(11) NOT NULL AUTO_INCREMENT;\r\nALTER TABLE `baseline_judging_locations` MODIFY `id` int(11) NOT NULL AUTO_INCREMENT;\r\nALTER TABLE `baseline_judging_preferences` MODIFY `id` int(11) NOT NULL AUTO_INCREMENT;\r\nALTER TABLE `baseline_judging_scores_bos` MODIFY `id` int(11) NOT NULL AUTO_INCREMENT;\r\nALTER TABLE `baseline_judging_scores` MODIFY `id` int(11) NOT NULL AUTO_INCREMENT;\r\nALTER TABLE `baseline_judging_tables` MODIFY `id` int(11) NOT NULL AUTO_INCREMENT;\r\nALTER TABLE `baseline_mods` MODIFY `id` int(11) NOT NULL AUTO_INCREMENT;\r\nALTER TABLE `baseline_preferences` MODIFY `id` int(11) NOT NULL AUTO_INCREMENT;\r\nALTER TABLE `baseline_special_best_data` MODIFY `id` int(11) NOT NULL AUTO_INCREMENT;\r\nALTER TABLE `baseline_special_best_info` MODIFY `id` int(11) NOT NULL AUTO_INCREMENT;\r\nALTER TABLE `baseline_sponsors` MODIFY `id` int(11) NOT NULL AUTO_INCREMENT;\r\nALTER TABLE `baseline_staff` MODIFY `id` int(11) NOT NULL AUTO_INCREMENT;\r\nALTER TABLE `baseline_styles` MODIFY `id` int(11) NOT NULL AUTO_INCREMENT;\r\nALTER TABLE `baseline_style_types` MODIFY `id` int(11) NOT NULL AUTO_INCREMENT;\r\nALTER TABLE `baseline_system` MODIFY `id` int(11) NOT NULL AUTO_INCREMENT;\r\nALTER TABLE `baseline_users` MODIFY `id` int(11) NOT NULL AUTO_INCREMENT;\r\n```"
+      },
+      {
+        "author": "geoffhumphrey",
+        "body": "For those entries with 0000 as their entry number, you'll have to manually change their ids in the database, again via phpMyAdmin or shell access. Once you activate auto_increment as above and change the affected entries, you should be good to go."
+      },
+      {
+        "author": "DesireeeKnott",
+        "body": "Thanks for the quick response!\n \nDesiree Knott\nFOAM Cup Organizer & Newsletter Editor\nAlemakers.org\ndesiree@highgravitybrew.com\n \n \n \nFrom: Geoff Humphrey <notifications@github.com> \nSent: Friday, October 5, 2018 12:16 PM\nTo: geoffhumphrey/brewcompetitiononlineentry <brewcompetitiononlineentry@noreply.github.com>\nCc: DesireeeKnott <desiree@highgravitybrew.com>; Author <author@noreply.github.com>\nSubject: Re: [geoffhumphrey/brewcompetitiononlineentry] All entries numbers are 0000 (#982)\n \nHi Desiree,\nSounds like the mySQL auto increment wasn't initialized when you moved servers. You can make sure all mySQL DB tables in your competition DB have the id row set to AUTO_INCREMENT by running the following SQL commands (change the baseline_ prefix to your db table's prefix or eliminate if no prefix on each) via phpMyAdmin or shell access:\nALTER TABLE `baseline_archive` MODIFY `id` int(11) NOT NULL AUTO_INCREMENT;\nALTER TABLE `baseline_brewer` MODIFY `id` int(11) NOT NULL AUTO_INCREMENT;\nALTER TABLE `baseline_brewing` MODIFY `id` int(11) NOT NULL AUTO_INCREMENT;\nALTER TABLE `baseline_contacts` MODIFY `id` int(11) NOT NULL AUTO_INCREMENT;\nALTER TABLE `baseline_contest_info` MODIFY `id` int(11) NOT NULL AUTO_INCREMENT;\nALTER TABLE `baseline_drop_off` MODIFY `id` int(11) NOT NULL AUTO_INCREMENT;\nALTER TABLE `baseline_judging_assignments` MODIFY `id` int(11) NOT NULL AUTO_INCREMENT;\nALTER TABLE `baseline_judging_flights` MODIFY `id` int(11) NOT NULL AUTO_INCREMENT;\nALTER TABLE `baseline_judging_locations` MODIFY `id` int(11) NOT NULL AUTO_INCREMENT;\nALTER TABLE `baseline_judging_preferences` MODIFY `id` int(11) NOT NULL AUTO_INCREMENT;\nALTER TABLE `baseline_judging_scores_bos` MODIFY `id` int(11) NOT NULL AUTO_INCREMENT;\nALTER TABLE `baseline_judging_scores` MODIFY `id` int(11) NOT NULL AUTO_INCREMENT;\nALTER TABLE `baseline_judging_tables` MODIFY `id` int(11) NOT NULL AUTO_INCREMENT;\nALTER TABLE `baseline_mods` MODIFY `id` int(11) NOT NULL AUTO_INCREMENT;\nALTER TABLE `baseline_preferences` MODIFY `id` int(11) NOT NULL AUTO_INCREMENT;\nALTER TABLE `baseline_special_best_data` MODIFY `id` int(11) NOT NULL AUTO_INCREMENT;\nALTER TABLE `baseline_special_best_info` MODIFY `id` int(11) NOT NULL AUTO_INCREMENT;\nALTER TABLE `baseline_sponsors` MODIFY `id` int(11) NOT NULL AUTO_INCREMENT;\nALTER TABLE `baseline_staff` MODIFY `id` int(11) NOT NULL AUTO_INCREMENT;\nALTER TABLE `baseline_styles` MODIFY `id` int(11) NOT NULL AUTO_INCREMENT;\nALTER TABLE `baseline_style_types` MODIFY `id` int(11) NOT NULL AUTO_INCREMENT;\nALTER TABLE `baseline_system` MODIFY `id` int(11) NOT NULL AUTO_INCREMENT;\nALTER TABLE `baseline_users` MODIFY `id` int(11) NOT NULL AUTO_INCREMENT;\n—\nYou are receiving this because you authored the thread.\nReply to this email directly, view it on GitHub <https://github.com/geoffhumphrey/brewcompetitiononlineentry/issues/982#issuecomment-427436871> , or mute the thread <https://github.com/notifications/unsubscribe-auth/Ap2wt1QIjusrKwD0LFu6bbhgxhWnpDk1ks5uh5O4gaJpZM4XKinr> .  <https://github.com/notifications/beacon/Ap2wt0x4EQuICqb7ZP3U3HQtChANrIDnks5uh5O4gaJpZM4XKinr.gif> \n"
+      }
+    ]
+  },
+  {
+    "id": 970,
+    "title": "2.1.13 - Set Language Preference - Lost Headers",
+    "url": "https://github.com/geoffhumphrey/brewcompetitiononlineentry/issues/970",
+    "author": "dfgroff",
+    "body": "Version:2.1.13\r\n\r\n\r\nInstallation URL:http://thoroughbrews.org/kbotb1\r\n\r\n\r\nIs your installation hosted on brewcompetition.com or brewcomp.com?NO\r\n\r\n\r\nDescription of Issue: Did the upgrade now my site doesn't look correct. I lost the words in the header and when I can make it to other pages I don't have any of the fields anymore. \r\n\r\n\r\n\r\nFor enhancements, please prepend \"Enhancement - \" to the title. For issues/bugs, please prepend the BCOE&M version number the title.\r\n",
+    "comments": [
+      {
+        "author": "geoffhumphrey",
+        "body": "This has to do with the installation not \"finding\" the correct language file (which, currently, is only US English) because it hasn't been set in the session. \r\n\r\nTo correct this, make sure that US English is selected as your language on Admin > Preferences > Site Preferences. You may need to clear your browser cache to see the words again.\r\n\r\nIf that doesn't work, access your database directly (via phpMyAdmin, shell access, etc.) and change the value in the prefsLanguage column to _en-US_ (see example below in phpMyAdmin).\r\n![2018-09-11_11-45-36](https://user-images.githubusercontent.com/5216502/45377631-605b3480-b5b8-11e8-8abf-324df0f95b2b.jpg)\r\n\r\nThen, clear your cache to end the PHP session.\r\n\r\nHope that helps!"
+      },
+      {
+        "author": "dfgroff",
+        "body": "Thank you that fixed it. I really appreciate the help."
+      },
+      {
+        "author": "dfgroff",
+        "body": "If I make a change on the site now I'm getting Unknown column 'archiveScoresheet' in 'field list' when I hit save. Any ideas on what this could be? Thanks"
+      },
+      {
+        "author": "djmitche",
+        "body": "It looks like this field was created as a rename of `archiveBrewingTableName` in a25aea3b3dd6e3aee854e23078ef619b02f6bef2.  Is there a corresponding DB migration?"
+      },
+      {
+        "author": "geoffhumphrey",
+        "body": "Yes, it was implemented with version 2.1.12's updating scripts - specifically around line 760 in /update/off_schedule_update.php - with this code:\r\n\r\n```\r\nif (!check_update(\"archiveScoresheet\", $prefix.\"archive\")) {\r\n\r\n\t$updateSQL = sprintf(\"ALTER TABLE `%s` CHANGE `archiveBrewingTableName` `archiveScoresheet` CHAR(1) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci NULL DEFAULT NULL;\",$prefix.\"archive\");\r\n\tmysqli_select_db($connection,$database);\r\n\tmysqli_real_escape_string($connection,$updateSQL);\r\n\t$result = mysqli_query($connection,$updateSQL);\r\n\r\n\t// Set all to 'J'\r\n\t$updateSQL = sprintf(\"UPDATE `%s` SET archiveScoresheet='J';\",$prefix.\"archive\");\r\n\tmysqli_select_db($connection,$database);\r\n\tmysqli_real_escape_string($connection,$updateSQL);\r\n\t$result = mysqli_query($connection,$updateSQL);\r\n\r\n}\r\n```\r\n\r\nYou can force an update by changing the FORCE_UPDATE constant in the paths.php script to TRUE, uploading to your installation, and accessing index.php a single time. This should make the necessary DB changes.\r\n\r\nAfter that, change the var back to FALSE and re-upload."
+      },
+      {
+        "author": "dfgroff",
+        "body": "Thanks that fixed it."
+      }
+    ]
+  },
+  {
+    "id": 969,
+    "title": "2.1.13 - Manage Style Types - BOS 2nd 3rd and HM not shown on report or main page",
+    "url": "https://github.com/geoffhumphrey/brewcompetitiononlineentry/issues/969",
+    "author": "heneksja",
+    "body": "Version:Turkeyshoot 2017 – BCOE&M 2.1.13\r\n\r\n\r\nhttps://turkeyshoot.brewcompetition.com/output/export.output.php?section=results&go=judging_scores_bos&action=download&filter=default&view=html\r\n\r\nInstallation URL:https://turkeyshoot.brewcompetition.com/\r\n\r\n\r\nIs your installation hosted on brewcompetition.com or brewcomp.com?\r\nyes\r\n\r\nDescription of Issue:\r\nBOS winners on reports and main page only shows the 1st BOS winner.  Would like it to also display 2nd BOS, 3Rd BOS and HM.  (maybe having a HM on FOX screwed it up)   I am having to take down the 2017 results now to get ready for 2018 but it was definitely only showing first place \r\n\r\n\r\nFor enhancements, please prepend \"Enhancement - \" to the title. For issues/bugs, please prepend the BCOE&M version number the title.\r\n",
+    "comments": [
+      {
+        "author": "geoffhumphrey",
+        "body": "To have the 2nd and 3rd places displayed, you'll need to edit their respective Style Types. Go to Admin > Competition Preparation > Manage Style Types and edit the BOS Method for each. Hope that helps!"
+      },
+      {
+        "author": "ercousin",
+        "body": "@geoffhumphrey What about HM? We entered HM into BOS Places, updated the style type for \"1/2/3 BOS\", but HM doesn't show up in the PDF report."
+      },
+      {
+        "author": "bobwright011",
+        "body": "@geoffhumphrey - we recently ran across this issue for our recent competition.  Thanks for the advice above, but it is also worth others knowing that the above fix also changes how beers get assigned to BOS.  During the competition, you would need to keep the BOS Method set to \"1st Only\" to get only 1st place beers to advance (how we ran our comp).  If set as above during the comp, all 1-3 place beers will be queued to advance to BOS and we didn't want that.  We changed the setting back to what is recommended above (1/2/3 place) afterward to get the other places to show up in the results page.  \r\n\r\nAs a future upgrade it might be nice to separate these functionalities."
+      },
+      {
+        "author": "waztros",
+        "body": "@geoffhumphrey \r\nWe have a hosted version and found a bug related to this issue that needs fixing. Hopefully this helps solve the issue.\r\n\r\nHosted version:\r\nhttps://hvhb.brewingcompetitions.com\r\n\r\nAdmin Dashboard>Preferences>Website Organization>Maximum Places in BOS\r\n\r\nI ended up changing the value from 3 to 1 but the value \"Maximum Places in BOS\" field still shows 3 as selected in the drop down even though I think under the hood it did in deed store the setting of the Maximum Places in BOS to be 1 in the database. Then it was only allowing me to select up to 1st place and HM for BOS winners.  Ended up being confusing when I wanted to change it back to 3 because it was already saying it was set to 3. I ended up changing the setting to 4 and then back to 3 which then finally worked to show the ability to select a 1st, 2nd, 3rd, and HM places for BOS winners instead of only a 1st and HM for selectable BOS winners."
+      }
+    ]
+  },
+  {
+    "id": 945,
+    "title": "How to switch to the translated version?",
+    "url": "https://github.com/geoffhumphrey/brewcompetitiononlineentry/issues/945",
+    "author": "grmelacz",
+    "body": "Hello everyone,\r\nI've started to translate the software to Czech in order to use it in our November competition for the first time. The translation process goes smoothly but I cannot find a way to enable the translated version or set it as default for the website.\r\n\r\nI've already created a separate directory and put a translated files there with correct ISO lang/region name. Even tried to set it manually directly in the database but without any effect.\r\n\r\nThe translation is going to be finished in a few days but I need to see it live first.\r\n\r\nHow do I set the default site language?",
+    "comments": [
+      {
+        "author": "geoffhumphrey",
+        "body": "Hi @grmelacz, first, thank you for your translation efforts!\r\n\r\nSince no other languages besides US English have been incorporated into the BCOE&M core as of the current release (2.1.12), you'll need to comment out the both of the _include_ lines in the /lang/language.lang.php file, like this:\r\n```\r\n//include (LANG.$_SESSION['prefsLanguageFolder'].DIRECTORY_SEPARATOR.$_SESSION['prefsLanguage'].'.lang.php');\r\n//include (LANG.$_SESSION['prefsLanguageFolder'].DIRECTORY_SEPARATOR.$_SESSION['prefsLanguage'].'_admin.lang.php');\r\n```\r\n\r\nThen, compose two new include statements that direct the program to your newly created directory and file. \r\n\r\nIf you followed the establish folder-file convention, you created a sub-directory in the /lang/ directory named _cs_ - the accepted ISO 639 two-letter abbreviation for Czech. Your translation file should be within that folder and named thus `cs-XX.lang.php` (replace the XX with the regional subtag). Most likely, this is CZ (all capitals).\r\n\r\nSo, your include code would look like this:\r\n```\r\ninclude (LANG.'cs'.DIRECTORY_SEPARATOR.'cs-CZ.lang.php');\r\ninclude (LANG.'cs'.DIRECTORY_SEPARATOR.'cs-CZ_admin.lang.php');\r\n```\r\n\r\nRe-upload the language.lang.php file to the /lang/ directory and you should be in business.\r\n\r\nIn the next version, this process will be automatic based upon a site preference.\r\n\r\nOne request: when you're done with your translation efforts, **please post the file** here so it can be incorporated into a future release (you'll need to post a .txt or .zip file). Or, post a link to a [gist here on GitHub](https://help.github.com/articles/creating-gists/)."
+      },
+      {
+        "author": "grmelacz",
+        "body": "Hey there, thanks for the reply. Tried your code and it works as desired. The translation is ~30 % done, will post it here once finished & tested. Also, the templates may need some updating to support the language correctly + the same applies for date/time locales which are currently in English."
+      },
+      {
+        "author": "grmelacz",
+        "body": "The translation is complete (except for the cider styles, will do that later). I've updated it to sync it with the latest stable release. Many string are still missing in the language files (nothing to translate), mostly in Admin part of the app, but overallly, it plays nice!\r\n\r\nSome suggestions for the release:\r\n- language switcher\r\n- date/time localisation - Czech locale + correct date/time formatting (d.n.Y, H:i)\r\n\r\n[cs_CZ.zip](https://github.com/geoffhumphrey/brewcompetitiononlineentry/files/2468469/cs_CZ.zip)"
+      },
+      {
+        "author": "carloswlkr",
+        "body": "I've done a very rough translation into Spanish. Is it possible to allow the users to switch between US English and es-ES? will there only be one language available to them? "
+      },
+      {
+        "author": "geoffhumphrey",
+        "body": "@carloswlkr - As it stands now, only the language set by the admin in Site Preferences will be used/displayed. There are plans to allow users to switch languages on the fly, but that hasn't been implemented yet.\r\n\r\n@grmelacz - Thanks for your work and the files! I'll work on getting them implemented for the next release."
+      },
+      {
+        "author": "schyzac",
+        "body": "@geoffhumphrey  - I would like to ask you if you implemented language switch option in 2.1.14 and how we can set CZ and US eventually more languages and switch between them"
+      },
+      {
+        "author": "VAbgta",
+        "body": "Hi, i translating to spanish and is almost done, i translate every requirements for the styles that need more information, but when i enter one of those styles, the requirements on the page are still in english, where i can translate this text to be show in the new entry page."
+      },
+      {
+        "author": "grmelacz",
+        "body": "Hey there, I've just updated the Czech translation for the latest version available, tested & working with the last stable release.\r\n[cs.zip](https://github.com/geoffhumphrey/brewcompetitiononlineentry/files/3489799/cs.zip)\r\n"
+      },
+      {
+        "author": "geoffhumphrey",
+        "body": "@grmelacz - the Czech language option will be fully available to all users in the upcoming 2.1.18 release. Admins will be able to choose it via Admin Dashboard > Preferences > Website Preferences.\r\n\r\n@VAbgta - have you been able to finish the Spanish (Spain) translations?"
+      },
+      {
+        "author": "VAbgta",
+        "body": "I will try to get it finish the next week.\n\nEl mar., 24 de sep. de 2019 a la(s) 15:20, Geoff Humphrey (\nnotifications@github.com) escribió:\n\n> @grmelacz <https://github.com/grmelacz> - the Czech language option will\n> be fully available to all users in the upcoming 2.1.18 release. Admins will\n> be able to choose it via Admin Dashboard > Preferences > Website\n> Preferences.\n>\n> @VAbgta <https://github.com/VAbgta> - have you been able to finish the\n> Spanish (Spain) translations?\n>\n> —\n> You are receiving this because you were mentioned.\n> Reply to this email directly, view it on GitHub\n> <https://github.com/geoffhumphrey/brewcompetitiononlineentry/issues/945?email_source=notifications&email_token=AMDLVFZUA6M76NWEWFTJNL3QLJZBBA5CNFSM4FKA557KYY3PNVWWK3TUL52HS4DFVREXG43VMVBW63LNMVXHJKTDN5WW2ZLOORPWSZGOD7PVR5Q#issuecomment-534730998>,\n> or mute the thread\n> <https://github.com/notifications/unsubscribe-auth/AMDLVF3GRDCNRYRV2NG6723QLJZBBANCNFSM4FKA557A>\n> .\n>\n"
+      },
+      {
+        "author": "grmelacz",
+        "body": "Hey there, I've updated the Czech translation to the latest version and also changed some earlier version strings to be displayed in a more natural way. Also changed the Google-translated string to real Czech :-)\r\n\r\nhttps://gist.github.com/grmelacz/c7d204e6e3823d2d9aa6e2d4a6990b5b"
+      }
+    ]
+  },
+  {
+    "id": 943,
+    "title": "Can I use \"Competition Categories\" at tables instead of styles?",
+    "url": "https://github.com/geoffhumphrey/brewcompetitiononlineentry/issues/943",
+    "author": "mlk2b",
+    "body": "We have a fairly small competition (about 100 entries) and tend to group various styles into Competition Categories. (For example, the Dark Standard category has American Stouts compete with British Porters. The Light Standard category has Czech Pils compete against Maibocks.) In my experience, though, the software only allows one style per table, which isn't feasible in our small competition. Is there a simple way around this so that I can assign multiple styles to one table for judging? \r\n\r\nHere's our site from last year's competition. http://throwdown.starcitybrewers.org/\r\n\r\nThanks for any help you can offer! (I'm pretty new to github and BCOEM so I apologize if this is a newb question!)",
+    "comments": [
+      {
+        "author": "ercousin",
+        "body": "What do you mean by \"one style per table\"? Do you mean style category? Even so, that isn't true, you can group whichever style into whichever table you want using the \"Add a Table\" step.\r\n\r\nEg.\r\n![image](https://user-images.githubusercontent.com/1551339/42414454-ad726fe2-8203-11e8-9e10-65f0225eb2c8.png)\r\n\r\nThe installation I'm pasting from already has all tables created, so ignore the red highlighting, but you should see something like this.\r\n\r\n![image](https://user-images.githubusercontent.com/1551339/42414470-dd20d1d4-8203-11e8-8e9d-4695b757a2a2.png)\r\n"
+      },
+      {
+        "author": "mlk2b",
+        "body": "I might be a tad confused. Thanks for bearing with me. \r\n\r\nI think our biggest issues come with beers like Spice, Herb, and Vegetable beers. Since they're all 30A, the software doesn't like me sending them to different tables. For example, can I send a Vanilla Porter (30A) to a \"Dark Specialty\" table and a Mango IPA (30A) to a \"Light Specialty\" table? My understanding is I have to assign the whole category to a single table. "
+      },
+      {
+        "author": "ercousin",
+        "body": "Correct, whole subcategory like 30A must be judged together as far as BCOEM is concerned. The Req Info specified by the entrant is just a text field. There's nothing to stop you from doing this manually, but then you wouldn't be able to report results through BCOEM.\r\n\r\nAlso, Mango IPA would be 29A Fruit Beer, since it's a fruited version of a classic style.\r\n\r\nIMO it's fairer to entrants to separate Specialty by established subcategory than try and interpret entrant intent and create \"light specialty\" and \"dark specialty\".\r\nEg.\r\nTable 5 - American Wild Ale\r\nTable 6 - Fruit Beer\r\nTable 7 - SHV Beer\r\nTable 8 - Other Specialty Beer"
+      },
+      {
+        "author": "mlk2b",
+        "body": "Okay, I think I understand the situation a little better now. Thank you.\r\n\r\nMy understanding is that it's currently not possible to assign individual entries to tables (you have to assign the whole subcategory). How difficult would it be to develop a version of BCOEM with the option of assigning individual entries to tables, rather than whole subcategories? Thanks again, guys!"
+      },
+      {
+        "author": "geoffhumphrey",
+        "body": "Yes, as it stands in all versions, the entire category of 30A would have to be \"lumped\" together in any given comp. Logistically, for me personally as a organizer, this is certainly sufficiently granular. However, if you want to lump certain entries together, you can do that too when you define the flights at a given table. Just make sure that you adjust your comp's judging preferences to NOT utilize the queued method. Then, define your table and then define each flight at that table, placing like entries in the same flight.\r\n\r\nJudges are certainly used to SHVs being combined and it's the table/flight's Head Judge's responsibility to order the pulling of entries (especially so if queued judging is being utilized); as a result, a natural division will occur based upon what the entrant has declared. A competent HJ would not (and should not) lump dissimilar entries together unless absolutely necessary."
+      },
+      {
+        "author": "mlk2b",
+        "body": "Okay - thank you, guys."
+      }
+    ]
+  },
+  {
+    "id": 932,
+    "title": "favicon",
+    "url": "https://github.com/geoffhumphrey/brewcompetitiononlineentry/issues/932",
+    "author": "glienhard",
+    "body": "It would be nice to specify a favicon for the competition.  Maybe give the option to use one of the uploaded images or a setting to allow it to be set the same as the competition logo.",
+    "comments": [
+      {
+        "author": "geoffhumphrey",
+        "body": "For non-hosted installations, you can specify a custom favicon. Simply replace the native BCOE&M favicon with your own in the root folder. Make sure it's named favicon.ico. To make sure it is truly replaced, you'll probably need to clear your browser cache and cookies."
+      },
+      {
+        "author": "glienhard",
+        "body": "How in the world did I miss that in the root folder LOL.  Not sure why but\nit's permissions are set to 775, I'll reset them to 664 like all the other\nfiles.\n\nSeems like past versions would automatically use the specified competition\nlogo as the favicon; any way of getting something like that in the newer\nversions?\n\nOn Tue, May 29, 2018 at 6:48 AM, Geoff Humphrey <notifications@github.com>\nwrote:\n\n> For non-hosted installations, you can specify a custom favicon. Simply\n> replace the native BCOE&M favicon with your own in the root folder. Make\n> sure it's named favicon.ico. To make sure it is truly replaced, you'll\n> probably need to clear your browser cache and cookies.\n>\n> —\n> You are receiving this because you authored the thread.\n> Reply to this email directly, view it on GitHub\n> <https://github.com/geoffhumphrey/brewcompetitiononlineentry/issues/932#issuecomment-392782985>,\n> or mute the thread\n> <https://github.com/notifications/unsubscribe-auth/AMExcqS7J_z1rahFnop_3bEApHeKdcqRks5t3VGigaJpZM4ULbis>\n> .\n>\n"
+      }
+    ]
+  },
+  {
+    "id": 811,
+    "title": "Feature request: Print barcoded judging numbers per table",
+    "url": "https://github.com/geoffhumphrey/brewcompetitiononlineentry/issues/811",
+    "author": "markalston",
+    "body": "I want the ability to print judging/entry number barcode labels per table.\r\n\r\nThe ability to scan and upload scoresheets is quite useful. However, naming and merging the scanned files for a huge number of scoresheets will be quite cumbersome.  \r\n\r\nThere exists software which can find a barcode on a tiff/pdf file and rename/merge/split it based on the barcode.  If barcodes are added to each scoresheet I can utilize this software to automatically name the pdfs for uploading.  \r\n\r\nI am planning on using external software this weekend (glables and libreoffice) to print barcoded labels for each scoresheet.   I am going to have the judges apply them on the top of each scoresheet.  Then I can simply bulk scan in the scoresheets and not worry about manually naming them.\r\n\r\nIn the future, I can imagine adding this ability to our web server so that I can simply upload randomly named tiff/pdf files and then the server will rename them based on the barcode.\r\n",
+    "comments": [
+      {
+        "author": "geoffhumphrey",
+        "body": "Please keep us posted on how this works out. Personally, I'm for anything that makes an organizer's job easier. \r\n\r\nWhat is the name of the software you mentioned? I'd like to do some research myself since I'm ramping up as organizer for another local comp."
+      },
+      {
+        "author": "markalston",
+        "body": "This is an open source barcode reader that I am going to try. http://zbar.sourceforge.net/\r\n\r\nI'd also love to try https://github.com/zxing/zxing which has a php port https://github.com/khanamiryan/php-qrcode-detector-decoder which looks like it would be pretty easy to integrate into bcoe.\r\n\r\nIf that fails, I'm falling back on using the demo for http://www.bardecode.com/en1/app/bardecodefiler/ but I'd rather not pay for something if we can find an opensource solution. "
+      },
+      {
+        "author": "markalston",
+        "body": "For others thinking about this here is a way to use zbar to automatically rename files via the barcode info in the file.  Read the comments to see how to use this on a whole directory. \r\n\r\nhttps://blog.jamesbayley.com/2016/05/04/extract-a-barcode-from-an-image-and-rename-the-file/"
+      },
+      {
+        "author": "markalston",
+        "body": "Here is an example sheet of what I am looking for from bcoe.  I am generating them this year using glabels but I think it would be a good addition to the software.\r\n\r\n[table_6.pdf](https://github.com/geoffhumphrey/brewcompetitiononlineentry/files/1253362/table_6.pdf)\r\n\r\nMy plan is for all the judges to add these to their scoresheets and then hopefully I will be able to use zbar to automatically sort the scans."
+      },
+      {
+        "author": "jimmyorkin",
+        "body": "I was planning on doing something very similar. I was thinking about printing the scoresheets on demand as judges took flights. The scoresheet would have the judge and entry information and barcode printed.\r\n\r\nThen as we get flights back we could drop all the competed scoresheets in the scanner and print one file per scoresheet. Then have the barcode reading software read the judging number barcode and rename the file based on the judging number.\r\n\r\nI am very interested in this effort and am willing to help. "
+      },
+      {
+        "author": "markalston",
+        "body": "I think printing scoresheets on demand will be a bit slower than you think. At least for our comp of 400+ entries it would be challenging. \r\n\r\nAnyway, here is what I have learned and implemented today during day one of our comp.\r\n\r\n1) Scan in the scoresheets in bulk. Doesn't matter what order but make sure each batch has all the sheets for those entries.  You will be generating very large multipage tiff files.\r\n \r\n2) When scanning do so to tiff files with 300 dpi resolution and grayscale colorspace.  (Tried black and white first due to suggestions on the net but zbar failed miserably in finding the codes).  (I used windows fax and scan on my brother MFC printer).\r\n\r\n3) Upload these files to your server.\r\n\r\n4) Use my bash script below to extract each scoresheet, get the qr code from a blurred crop of the tiff (blurring yielded much much better qr code extraction for some reason and cropping sped up the qr detection), sort the scoresheets by code and then finally generate multipage pdfs from those tifs.\r\n\r\nBash Script:\r\n```\r\n#!/bin/bash\r\n# Bash script to auto sort and generate pdfs from scanned scoresheets\r\n# Author: Mark Alston\r\n#\r\n# First change the IFS in case our filenames have spaced\r\nSAVEIFS=$IFS\r\nIFS=$'\\n'\r\n# Generate the necessary folders but don't complain if they exist.\r\nmkdir -p processed\r\nmkdir -p split\r\nmkdir -p blurred\r\nmkdir -p entries\r\nmkdir -p pdfs\r\n\r\nfor file in *.tif\r\ndo\r\n#  Figure out how many scoresheets are in the file.\r\n    PAGES=$(identify ${file} | wc -l)\r\n\r\n    for ((i=0;i<$PAGES;i++))\r\n    do\r\n        echo \"$file $i\"\r\n\r\n#      extract the top of the scoresheet and blur it for qr code detection. Move it into the blurred subfolder.\r\n        convert ${file}[$i] -scene 1 -blur 0 -extract 1240x400 blurred/${file%.tif}_$i.tif\r\n\r\n#      extract the scoresheet with normal resolution and move it into a temp folder.\r\n        convert ${file}[$i] -scene 1 split/${file%.tif}_$i.tif\r\n\r\n#      Find the entry number in the scoresheet and convert to 6 digits.\r\n        ENTRY=$(zbarimg  -Si25.disable -q --raw blurred/${file%.tif}_$i.tif)\r\n        ENTRY=`printf %06d $ENTRY`\r\n\r\n#      Move the scoresheet into a separate entry folder \r\n#         Note: If the entry number wasn't found it will simply leave it in the main entries folder.\r\n#                   You will then need to manually go through those to find the number.  \r\n#                   I have had very few of these.  8 out of hundreds didn't scan.\r\n        mkdir -p entries/$ENTRY\r\n        mv split/${file%.tif}_$i.tif entries/$ENTRY\r\n\r\n    done\r\n    cd entries\r\n    for ENTRY in `find * -type d`\r\n    do\r\n        # Make the final pdf from the tiffs and move a pdf folder.\r\n        convert ${ENTRY}/*.tif ../pdfs/${ENTRY}.pdf\r\n        rm -rf ${ENTRY}\r\n    done\r\n    cd ..\r\n    mv ${file} processed\r\ndone\r\nIFS=$SAVEIFS\r\n```"
+      },
+      {
+        "author": "markalston",
+        "body": "one final note  you can run ps2pdf on the final pdfs to greatly reduce their size without much if any reduction in quality.\r\n\r\nWe did this to copy the pdfs into the final folder\r\n\r\n```\r\nfor file in *.pdf\r\ndo\r\nps2pdf $file ../user_docs/$file\r\ndone\r\n```"
+      },
+      {
+        "author": "markalston",
+        "body": "Final note after using this method.  We will add the full subcategory name to the labels next year as brewers were somewhat confused figuring out which of their beers the scoresheets belonged to since the judging numbers were different from their entry numbers.  We did include the sheet showing the correlation for each into their packets but still, you know brewers.\r\n\r\nOverall though it worked great and was very easy to implement (once I figured out the bash script above)."
+      },
+      {
+        "author": "jimmyorkin",
+        "body": "I want to give an update on what we have done with the Bluebonnet Brewoff in 2018. I wrote some php pages that use fpdf and fpdi to generate PDF files of the scoresheets. The scoresheets have the barcode I need for managing the scoresheets for return to the entrants. It also reaches into the database and pulls all the information about the entry and prints them on the scoresheet for the judges. It also prints the judge information. The page supports beer, mead and cider scoresheets. A sample is attached.\r\n\r\nWe judged 1379 entries with 1st round scoresheets.\r\n\r\nI had the judges sit down and enter their information directly so any mistakes was on them. The judges printed their own scoresheets right before they sat down to judge a flight. We have a HP M521 printer/scanner that is pretty fast. We had no issues by printing the scoresheets as we went.\r\n\r\nThe zlibimg tool worked great. Thanks to Mark for his work in finding the tool. I did not have to blur the image. It worked fine just reading the tiff files.\r\n\r\nThere is still work to be done. What I had save hours of scanning time since I could scan in large batches. Actually I scanned by flight. I left the paper scoresheets in flight order. The judges liked having all the information pre-filled in for them. I had a couple of judges that could not write their comments on the correct scoresheets. They reprinted them and rewrote their comments or used a copier to make a correct looking sheet.\r\n\r\nMy pages are hacks at best and do not run under the BCOEM environment. If there is interest productionizing my work, I would be interested.\r\n\r\n[doc.pdf](https://github.com/geoffhumphrey/brewcompetitiononlineentry/files/2362092/doc.pdf)\r\n"
+      },
+      {
+        "author": "ercousin",
+        "body": "Thanks for sharing @jimmyorkin that's pretty cool!"
+      }
+    ]
+  },
+  {
+    "id": 507,
+    "title": "Nginx Rewrite Rules?",
+    "url": "https://github.com/geoffhumphrey/brewcompetitiononlineentry/issues/507",
+    "author": "dmofot",
+    "body": "Does anybody have the rewrite rules to do pretty urls for nginx?  Specifically lines 10-13 in the [.htaccess](https://github.com/geoffhumphrey/brewcompetitiononlineentry/blob/589336010a0b895906ee23cc170f7f19464be7dc/.htaccess).\n\n```\nRewriteRule ^$ index.php [L]\nRewriteRule ^([A-Za-z0-9-]+)?$ index.php?section=$1 [L]\nRewriteRule ^([A-Za-z0-9-]+)/([A-Za-z0-9-]+)/?$ index.php?section=$1&go=$2 [L]\nRewriteRule ^([A-Za-z0-9-]+)/([A-Za-z0-9-]+)/([A-Za-z0-9-]+)/?$ index.php?section=$1&go=$2&action=$3 [L]\n```\n",
+    "comments": [
+      {
+        "author": "geoffhumphrey",
+        "body": "Very sorry for the three-month late reply. I'll look into the Nginx rewrite rules for a future release. However, I have to admit that I'm not familiar with the platform. Here's a resource that may help to convert the Apache rewrite rules that ship with BCOE&M to Nginx:\n\nhttps://www.nginx.com/blog/converting-apache-to-nginx-rewrite-rules/\n"
+      },
+      {
+        "author": "elronalds",
+        "body": "@dmofot @geoffhumphrey This might be useful and is working on my nginx configuration.  You might like to add this to the documentation as an example.\r\n\r\n```\r\nserver {\r\n    listen 80;\r\n\r\n    root /usr/share/nginx/sites/example.com/web/content;\r\n    index index.php index.html index.htm;\r\n\r\n    server_name example.com www.example.com;\r\n\r\n    rewrite ^/$ /index.php break;\r\n    rewrite ^/([A-Za-z0-9-]+)?$ /index.php?section=$1 break;\r\n    rewrite ^/([A-Za-z0-9-]+)/([A-Za-z0-9-]+)/?$ /index.php?section=$1&go=$2 break;\r\n    rewrite ^/([A-Za-z0-9-]+)/([A-Za-z0-9-]+)/([A-Za-z0-9-]+)/?$ /index.php?section=$1&go=$2&action=$3 break;\r\n    rewrite ^/([A-Za-z0-9-]+)/([A-Za-z0-9-]+)/([A-Za-z0-9-]+)/([A-Za-z0-9-]+)/?$ /index.php?section=$1&go=$2&action=$3&id=$4 break;\r\n\r\n    location / {\r\n        try_files $uri $uri/ /index.php?$args;\r\n    }\r\n\r\n    location ~ \\.php$ {\r\n        try_files $uri =404;\r\n        fastcgi_split_path_info ^(.+\\.php)(/.+)$;\r\n        fastcgi_pass unix:/var/run/php-fpm.sock;\r\n        fastcgi_index index.php;\r\n        fastcgi_param SCRIPT_FILENAME $document_root$fastcgi_script_name;\r\n        include fastcgi_params;\r\n    }\r\n}\r\n```"
+      }
+    ]
+  }
+]

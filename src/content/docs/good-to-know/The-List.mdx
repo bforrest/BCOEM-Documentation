@@ -1,0 +1,8 @@
+---
+title: "Good To Know" 
+---
+
+import issues from '../../../data/issues.json'; import IssueList from
+'../../../components/IssueThread.astro';
+
+{issues.map((issue, i) => <IssueList id={issue.id} />)}

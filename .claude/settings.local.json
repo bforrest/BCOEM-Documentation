@@ -1,0 +1,17 @@
+{
+  "permissions": {
+    "allow": [
+      "Bash(npm list:*)",
+      "Bash(node -e \"const s = require\\('/Users/barryforrest/Projects/BCOEM-Documentation/node_modules/@astrojs/starlight/package.json'\\); console.log\\(s.version\\)\")",
+      "Bash(git add:*)",
+      "Bash(git commit -m ':*)",
+      "Bash(npm install:*)",
+      "Bash(npm test:*)",
+      "Bash(git commit:*)",
+      "Bash(npm ls:*)",
+      "Bash(git -C /Users/barryforrest/Projects/BCOEM-Documentation diff 2593646..6cceb9e)",
+      "Bash(node -e ':*)",
+      "Bash(npm run:*)"
+    ]
+  }
+}
