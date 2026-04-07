@@ -1,7 +1,7 @@
 ---
-import Thread from './Thread.astro';
-import Reply from './Reply.astro';
-import issues from '../data/issues.json';
+import Thread from "./Thread.astro";
+import Reply from "./Reply.astro";
+import issues from "../data/issues.json";
 
 interface Issue {
   id: number;
@@ -21,22 +21,25 @@ const numericId = Number(id);
 const issue = (issues as Issue[]).find((i) => i.id === numericId);
 ---
 
-{issue ? (
-  <Thread issue={issue.url}>
-    <Reply author={issue.author}>
-      <Fragment set:html={issue.body} />
-    </Reply>
-    {issue.comments.map((comment) => (
-      <Reply author={comment.author}>
-        <Fragment set:html={comment.body} />
+{
+  issue ? (
+    <Thread issue={issue.url} title={issue.title} collapsible>
+      <Reply author={issue.author}>
+        <Fragment set:html={issue.body} />
       </Reply>
-    ))}
-  </Thread>
-) : (
-  <div class="issue-not-found">
-    Issue #{id} not found in issues.json. Run <code>node scripts/fetch-issues.mjs</code> to populate.
-  </div>
-)}
+      {issue.comments.map((comment) => (
+        <Reply author={comment.author}>
+          <Fragment set:html={comment.body} />
+        </Reply>
+      ))}
+    </Thread>
+  ) : (
+    <div class="issue-not-found">
+      Issue #{id} not found in issues.json. Run{" "}
+      <code>node scripts/fetch-issues.mjs</code> to populate.
+    </div>
+  )
+}
 
 <style>
   .issue-not-found {

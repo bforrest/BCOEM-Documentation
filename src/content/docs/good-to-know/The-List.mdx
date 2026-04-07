@@ -1,8 +1,8 @@
 ---
-title: "Good To Know" 
+title: "Good To Know"
 ---
 
-import issues from '../../../data/issues.json'; import IssueList from
-'../../../components/IssueThread.astro';
+import issues from '../../../data/issues.json';
+import IssueThread from '../../../components/IssueThread.astro';
 
-{issues.map((issue, i) => <IssueList id={issue.id} />)}
+{issues.map((issue) => <IssueThread id={issue.id} />)}

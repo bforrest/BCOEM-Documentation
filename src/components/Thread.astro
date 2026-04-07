@@ -1,33 +1,59 @@
 ---
 interface Props {
   issue?: string;
+  title?: string;
+  collapsible?: boolean;
 }
 
-const { issue } = Astro.props;
+const { issue, title, collapsible = false } = Astro.props;
 
-// Extract a short label from the issue URL, e.g. "#42"
 function issueLabel(url: string): string {
   const match = url.match(/\/issues\/(\d+)/);
-  return match ? `#${match[1]}` : 'Issue';
+  return match ? `#${match[1]}` : "Issue";
 }
 ---
 
 <div class="thread">
-  {issue && (
-    <div class="thread-header">
-      <a
-        href={issue}
-        target="_blank"
-        rel="noopener noreferrer"
-        class="thread-issue-link"
-      >
-        {issueLabel(issue)} on GitHub ↗
-      </a>
-    </div>
+  {collapsible ? (
+    <details>
+      <summary class="thread-header">
+        <span class="thread-title">{title ?? "Thread"}</span>
+        {issue && (
+          <a
+            href={issue}
+            target="_blank"
+            rel="noopener noreferrer"
+            class="thread-issue-link"
+            onclick="event.stopPropagation()"
+          >
+            {issueLabel(issue)} on GitHub ↗
+          </a>
+        )}
+      </summary>
+      <div class="thread-body">
+        <slot />
+      </div>
+    </details>
+  ) : (
+    <>
+      {issue && (
+        <div class="thread-header">
+          <a
+            href={issue}
+            target="_blank"
+            rel="noopener noreferrer"
+            class="thread-issue-link"
+          >
+            {title && `${title} — `}
+            {issueLabel(issue)} on GitHub ↗
+          </a>
+        </div>
+      )}
+      <div class="thread-body">
+        <slot />
+      </div>
+    </>
   )}
-  <div class="thread-body">
-    <slot />
-  </div>
 </div>
 
 <style>
@@ -38,18 +64,54 @@ function issueLabel(url: string): string {
     margin: 1.5rem 0;
   }
 
+  /* Collapsible header (summary element) */
+  summary.thread-header {
+    list-style: none;
+    cursor: pointer;
+    user-select: none;
+  }
+
+  summary.thread-header::-webkit-details-marker {
+    display: none;
+  }
+
   .thread-header {
     background: var(--sl-color-bg-nav);
     border-bottom: 1px solid var(--sl-color-hairline);
     padding: 8px 14px;
     display: flex;
-    justify-content: flex-end;
+    align-items: center;
+    gap: 8px;
+  }
+
+  /* Chevron via pseudo-element on collapsible headers */
+  details > summary.thread-header::before {
+    content: "▶";
+    font-size: 0.6rem;
+    color: var(--sl-color-text-accent);
+    transition: transform 0.15s ease;
+    flex-shrink: 0;
+  }
+
+  details[open] > summary.thread-header::before {
+    transform: rotate(90deg);
+  }
+
+  .thread-title {
+    flex: 1;
+    font-size: 0.8rem;
+    font-weight: 600;
+    color: var(--sl-color-text);
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
   }
 
   .thread-issue-link {
     font-size: 0.75rem;
     color: var(--sl-color-text-accent);
     text-decoration: none;
+    flex-shrink: 0;
   }
 
   .thread-issue-link:hover {
