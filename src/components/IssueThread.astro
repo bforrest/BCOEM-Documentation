@@ -17,7 +17,8 @@ interface Props {
 }
 
 const { id } = Astro.props;
-const issue = (issues as Issue[]).find((i) => i.id === id);
+const numericId = Number(id);
+const issue = (issues as Issue[]).find((i) => i.id === numericId);
 ---
 
 {issue ? (
