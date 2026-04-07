@@ -1,0 +1,99 @@
+---
+import { avatarColor, avatarInitials } from '../lib/avatarColor.js';
+
+interface Props {
+  author: string;
+  color?: string;
+}
+
+const { author, color } = Astro.props;
+const bgColor = color ?? avatarColor(author);
+const initials = avatarInitials(author);
+---
+
+<div class="reply">
+  <div class="reply-avatar" style={`background-color: ${bgColor}`}>
+    {initials}
+  </div>
+  <div class="reply-body">
+    <div class="reply-header">
+      <span class="reply-author">{author}</span>
+    </div>
+    <div class="reply-bubble">
+      <slot />
+    </div>
+    <div class="reply-children">
+      <slot name="replies" />
+    </div>
+  </div>
+</div>
+
+<style>
+  .reply {
+    display: flex;
+    gap: 10px;
+    align-items: flex-start;
+    margin-bottom: 12px;
+  }
+
+  .reply-avatar {
+    width: 36px;
+    height: 36px;
+    border-radius: 50%;
+    color: #fff;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-weight: 700;
+    font-size: 13px;
+    flex-shrink: 0;
+    font-family: var(--sl-font-system-mono, monospace);
+  }
+
+  .reply-body {
+    flex: 1;
+    min-width: 0;
+  }
+
+  .reply-header {
+    margin-bottom: 4px;
+  }
+
+  .reply-author {
+    font-weight: 600;
+    font-size: 0.85rem;
+    color: var(--sl-color-text);
+  }
+
+  .reply-bubble {
+    background: var(--sl-color-bg);
+    border: 1px solid var(--sl-color-hairline);
+    border-radius: 6px;
+    padding: 10px 12px;
+    font-size: 0.875rem;
+    line-height: 1.6;
+    color: var(--sl-color-text);
+  }
+
+  .reply-bubble :global(p:last-child) {
+    margin-bottom: 0;
+  }
+
+  .reply-children {
+    margin-top: 10px;
+    margin-left: 24px;
+  }
+
+  /* Scale avatar down for nested replies */
+  .reply-children :global(.reply-avatar) {
+    width: 28px;
+    height: 28px;
+    font-size: 11px;
+  }
+
+  .reply-children :global(.reply-children .reply-avatar) {
+    width: 22px;
+    height: 22px;
+    font-size: 9px;
+  }
+</style>
