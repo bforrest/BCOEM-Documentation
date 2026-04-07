@@ -1,0 +1,50 @@
+---
+import Thread from './Thread.astro';
+import Reply from './Reply.astro';
+import issues from '../data/issues.json';
+
+interface Issue {
+  id: number;
+  title: string;
+  url: string;
+  author: string;
+  body: string;
+  comments: { author: string; body: string }[];
+}
+
+interface Props {
+  id: number;
+}
+
+const { id } = Astro.props;
+const issue = (issues as Issue[]).find((i) => i.id === id);
+---
+
+{issue ? (
+  <Thread issue={issue.url}>
+    <Reply author={issue.author}>
+      <Fragment set:html={issue.body} />
+    </Reply>
+    {issue.comments.map((comment) => (
+      <Reply author={comment.author}>
+        <Fragment set:html={comment.body} />
+      </Reply>
+    ))}
+  </Thread>
+) : (
+  <div class="issue-not-found">
+    Issue #{id} not found in issues.json. Run <code>node scripts/fetch-issues.mjs</code> to populate.
+  </div>
+)}
+
+<style>
+  .issue-not-found {
+    border: 1px dashed var(--sl-color-hairline);
+    border-radius: 6px;
+    padding: 12px 16px;
+    font-size: 0.875rem;
+    color: var(--sl-color-text);
+    opacity: 0.7;
+    margin: 1.5rem 0;
+  }
+</style>
