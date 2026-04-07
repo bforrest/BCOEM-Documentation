@@ -30,6 +30,10 @@ describe('parseArgs', () => {
   it('throws when --repo is missing', () => {
     expect(() => parseArgs([])).toThrow('--repo is required');
   });
+
+  it('throws when --state is invalid', () => {
+    expect(() => parseArgs(['--repo', 'bcoem/app', '--state', 'invalid'])).toThrow('--state must be one of');
+  });
 });
 
 describe('transformIssue', () => {
@@ -74,5 +78,10 @@ describe('transformIssue', () => {
       { author: 'BCOEMSupport', body: 'Here is the fix' },
       { author: 'OriginalPoster', body: 'Thanks!' },
     ]);
+  });
+
+  it('defaults body to empty string when null', () => {
+    const result = transformIssue({ ...githubIssue, body: null }, []);
+    expect(result.body).toBe('');
   });
 });

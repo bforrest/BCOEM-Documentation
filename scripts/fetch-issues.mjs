@@ -14,6 +14,10 @@ export function parseArgs(argv) {
     else if (argv[i] === '--label') args.labels.push(argv[++i]);
     else if (argv[i] === '--state') args.state = argv[++i];
   }
+  const VALID_STATES = ['open', 'closed', 'all'];
+  if (!VALID_STATES.includes(args.state)) {
+    throw new Error(`--state must be one of: ${VALID_STATES.join(', ')}`);
+  }
   if (!args.repo) throw new Error('--repo is required (e.g. --repo owner/name)');
   return args;
 }
@@ -45,7 +49,7 @@ async function fetchIssues({ repo, labels, state }) {
     ...(token ? { Authorization: `Bearer ${token}` } : {}),
   };
 
-  const labelParam = labels.length ? `&labels=${labels.join(',')}` : '';
+  const labelParam = labels.length ? `&labels=${labels.map(encodeURIComponent).join(',')}` : '';
   const url = `https://api.github.com/repos/${repo}/issues?state=${state}&per_page=100${labelParam}`;
 
   const res = await fetch(url, { headers });
