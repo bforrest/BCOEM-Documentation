@@ -26,29 +26,16 @@ jobs:
         with:
           node-version: 22
 
-      # Build main site
-      - name: Install main site dependencies
+      - name: Install dependencies
         run: npm ci
 
-      - name: Build main site
+      - name: Build
         run: npm run build
         env:
           NODE_ENV: production
 
-      # Build docs (Starlight)
-      - name: Install docs dependencies
-        run: npm ci
-        working-directory: .
-
-      - name: Build docs
-        run: npm run build
-        working-directory: .
-
-      # Merge: copy docs/dist into dist/docs
-      - name: Merge docs into main dist
-        run: cp -r docs/dist dist/docs
-
       - name: Upload Pages artifact
+        if: ${{ !env.ACT }}
         uses: actions/upload-pages-artifact@v3
         with:
           path: ./dist
@@ -61,5 +48,6 @@ jobs:
       url: ${{ steps.deployment.outputs.page_url }}
     steps:
       - name: Deploy to GitHub Pages
+        if: ${{ !env.ACT }}
         id: deployment
         uses: actions/deploy-pages@v4
