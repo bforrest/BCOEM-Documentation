@@ -12,7 +12,7 @@ const initials = avatarInitials(author);
 ---
 
 <div class="reply">
-  <div class="reply-avatar" style={`background-color: ${bgColor}`}>
+  <div class="reply-avatar" style={`background-color: ${bgColor}; --avatar-size: 36px; --avatar-font: 13px;`}>
     {initials}
   </div>
   <div class="reply-body">
@@ -37,17 +37,16 @@ const initials = avatarInitials(author);
   }
 
   .reply-avatar {
-    width: 36px;
-    height: 36px;
+    width: var(--avatar-size, 36px);
+    height: var(--avatar-size, 36px);
     border-radius: 50%;
     color: #fff;
     display: flex;
     align-items: center;
     justify-content: center;
     font-weight: 700;
-    font-size: 13px;
+    font-size: var(--avatar-font, 13px);
     flex-shrink: 0;
-    font-family: var(--sl-font-system-mono, monospace);
   }
 
   .reply-body {
@@ -66,7 +65,7 @@ const initials = avatarInitials(author);
   }
 
   .reply-bubble {
-    background: var(--sl-color-bg);
+    background: var(--sl-color-bg-nav);
     border: 1px solid var(--sl-color-hairline);
     border-radius: 6px;
     padding: 10px 12px;
@@ -82,18 +81,12 @@ const initials = avatarInitials(author);
   .reply-children {
     margin-top: 10px;
     margin-left: 24px;
+    --avatar-size: 28px;
+    --avatar-font: 11px;
   }
 
-  /* Scale avatar down for nested replies */
-  .reply-children :global(.reply-avatar) {
-    width: 28px;
-    height: 28px;
-    font-size: 11px;
-  }
-
-  .reply-children :global(.reply-children .reply-avatar) {
-    width: 22px;
-    height: 22px;
-    font-size: 9px;
+  .reply-children .reply-children {
+    --avatar-size: 22px;
+    --avatar-font: 9px;
   }
 </style>
