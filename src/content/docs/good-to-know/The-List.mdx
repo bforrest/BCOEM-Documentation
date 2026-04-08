@@ -1,8 +1,23 @@
 ---
-title: "Good To Know"
+title: "List of Good Stuff"
 ---
 
-import issues from '../../../data/issues.json';
-import IssueThread from '../../../components/IssueThread.astro';
+import issues from '../../../data/issues.json'; import IssueThread from
+'../../../components/IssueThread.astro';
 
-{issues.map((issue) => <IssueThread id={issue.id} />)}
+{
+  issues.map((issue) => (
+    <p>
+      <a href={`${import.meta.env.BASE_URL}/issues/${issue.id}`}>
+        #{issue.id} - {issue.title}
+      </a>
+    </p>
+  ))
+}
+
+<style>{`
+  a {
+    color: var(--starlight-color-primary);
+    text-decoration: none;
+  }
+`}</style>
