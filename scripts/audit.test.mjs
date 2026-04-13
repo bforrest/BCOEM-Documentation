@@ -2,7 +2,7 @@ import { describe, it, expect, afterEach } from 'vitest';
 import { mkdtempSync, writeFileSync, mkdirSync, rmSync } from 'node:fs';
 import { join, dirname } from 'node:path';
 import { tmpdir } from 'node:os';
-import { parseArgs, collectDocFiles, checkBrokenLinks, checkCaseSensitivity } from './audit.mjs';
+import { parseArgs, collectDocFiles, checkBrokenLinks, checkCaseSensitivity, checkMdxHazards } from './audit.mjs';
 
 function makeTempDocs(files) {
   const root = mkdtempSync(join(tmpdir(), 'audit-test-'));
@@ -174,5 +174,71 @@ describe('checkCaseSensitivity', () => {
     });
     const files = collectDocFiles(dir);
     expect(checkCaseSensitivity(files)).toHaveLength(0);
+  });
+});
+
+describe('checkMdxHazards', () => {
+  let dir;
+  afterEach(() => rmSync(dir, { recursive: true, force: true }));
+
+  it('ignores .md files (only checks .mdx)', () => {
+    dir = makeTempDocs({ 'guides/plain.md': 'Some {text} here' });
+    const files = collectDocFiles(dir);
+    expect(checkMdxHazards(files)).toHaveLength(0);
+  });
+
+  it('flags unescaped { in MDX prose', () => {
+    dir = makeTempDocs({
+      'good-to-know/page.mdx': '---\ntitle: T\n---\n\nUse margin: {0px} for this.',
+    });
+    const files = collectDocFiles(dir);
+    const findings = checkMdxHazards(files);
+    expect(findings.some((f) => f.check === 'mdx-hazards')).toBe(true);
+    expect(findings.some((f) => f.message.includes('unescaped'))).toBe(true);
+  });
+
+  it('does not flag { inside a code fence', () => {
+    dir = makeTempDocs({
+      'good-to-know/page.mdx': '---\ntitle: T\n---\n\n```css\nmargin: {0px}\n```',
+    });
+    const files = collectDocFiles(dir);
+    expect(checkMdxHazards(files)).toHaveLength(0);
+  });
+
+  it('does not flag { in inline code', () => {
+    dir = makeTempDocs({
+      'good-to-know/page.mdx': '---\ntitle: T\n---\n\nUse `{value}` in JSX.',
+    });
+    const files = collectDocFiles(dir);
+    expect(checkMdxHazards(files)).toHaveLength(0);
+  });
+
+  it('does not flag { on lines starting with < (JSX component lines)', () => {
+    dir = makeTempDocs({
+      'good-to-know/page.mdx':
+        '---\ntitle: T\n---\n\n<Component prop={value}>\n  content\n</Component>',
+    });
+    const files = collectDocFiles(dir);
+    const unescaped = checkMdxHazards(files).filter((f) => f.message.includes('unescaped'));
+    expect(unescaped).toHaveLength(0);
+  });
+
+  it('flags raw Markdown list inside JSX component', () => {
+    dir = makeTempDocs({
+      'good-to-know/page.mdx':
+        '---\ntitle: T\n---\n\n<Thread>\n- item one\n- item two\n</Thread>',
+    });
+    const files = collectDocFiles(dir);
+    const findings = checkMdxHazards(files).filter((f) => f.message.includes('Markdown list'));
+    expect(findings.length).toBeGreaterThan(0);
+  });
+
+  it('does not flag Markdown list outside JSX', () => {
+    dir = makeTempDocs({
+      'good-to-know/page.mdx': '---\ntitle: T\n---\n\n- item one\n- item two',
+    });
+    const files = collectDocFiles(dir);
+    const findings = checkMdxHazards(files).filter((f) => f.message.includes('Markdown list'));
+    expect(findings).toHaveLength(0);
   });
 });

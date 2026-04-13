@@ -112,3 +112,62 @@ export function checkCaseSensitivity(files) {
   }
   return findings;
 }
+
+// ─── Check: MDX hazards ───────────────────────────────────────────────────────
+
+export function checkMdxHazards(files) {
+  const findings = [];
+  for (const file of files) {
+    if (!file.path.endsWith('.mdx')) continue;
+
+    let inFence = false;
+    let jsxDepth = 0;
+
+    file.lines.forEach((line, i) => {
+      const lineNum = i + 1;
+      const trimmed = line.trim();
+
+      // Track code fences
+      if (/^```|^~~~/.test(trimmed)) {
+        inFence = !inFence;
+        return;
+      }
+      if (inFence) return;
+
+      // Skip frontmatter delimiters, imports, blank lines
+      if (/^---/.test(trimmed) || /^import\s/.test(trimmed) || trimmed === '') return;
+
+      // Track JSX depth by counting PascalCase component opens/closes
+      const opens = (line.match(/<[A-Z][A-Za-z]*(?:\s[^>]*)?>(?!.*\/>)/g) || []).length;
+      const closes = (line.match(/<\/[A-Z][A-Za-z]*>/g) || []).length;
+      const selfClose = (line.match(/<[A-Z][A-Za-z]*[^>]*\/>/g) || []).length;
+      jsxDepth = Math.max(0, jsxDepth + opens - closes - selfClose);
+
+      // Remove inline code before checking for bare {
+      const stripped = line.replace(/`[^`]+`/g, '___');
+
+      // Unescaped { in prose: not on a JSX line (starting with <) or JSX expression line (starting with {)
+      if (stripped.includes('{') && !/^\s*[<{]/.test(line)) {
+        findings.push({
+          check: 'mdx-hazards',
+          file: file.path,
+          line: lineNum,
+          text: trimmed.substring(0, 80),
+          message: 'Potential unescaped { in prose — escape as \\{ or wrap in a code block',
+        });
+      }
+
+      // Raw Markdown list inside an open JSX component
+      if (jsxDepth > 0 && /^\s*[-*]\s+/.test(line)) {
+        findings.push({
+          check: 'mdx-hazards',
+          file: file.path,
+          line: lineNum,
+          text: trimmed.substring(0, 80),
+          message: 'Raw Markdown list inside JSX component — use <ul>/<li> instead',
+        });
+      }
+    });
+  }
+  return findings;
+}
