@@ -17,11 +17,16 @@ export function collectDocFiles(docsDir) {
       const full = join(dir, entry.name);
       if (entry.isDirectory()) walk(full);
       else if (entry.isFile() && /\.(md|mdx)$/.test(entry.name)) {
-        const content = readFileSync(full, 'utf-8');
-        results.push({ path: full, content, lines: content.split('\n') });
+        try {
+          const content = readFileSync(full, 'utf-8');
+          results.push({ path: full, content, lines: content.split('\n') });
+        } catch {
+          // skip unreadable files silently
+        }
       }
     }
   }
+  if (!existsSync(docsDir)) return [];
   walk(docsDir);
   return results;
 }

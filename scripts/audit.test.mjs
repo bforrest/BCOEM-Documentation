@@ -68,4 +68,8 @@ describe('collectDocFiles', () => {
     expect(file.content).toBe('line1\nline2');
     expect(file.lines).toEqual(['line1', 'line2']);
   });
+
+  it('returns empty array for non-existent directory', () => {
+    expect(collectDocFiles('/tmp/does-not-exist-audit-test')).toEqual([]);
+  });
 });
