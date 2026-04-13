@@ -2,7 +2,7 @@ import { describe, it, expect, afterEach } from 'vitest';
 import { mkdtempSync, writeFileSync, mkdirSync, rmSync } from 'node:fs';
 import { join, dirname } from 'node:path';
 import { tmpdir } from 'node:os';
-import { parseArgs, collectDocFiles } from './audit.mjs';
+import { parseArgs, collectDocFiles, checkBrokenLinks, checkCaseSensitivity } from './audit.mjs';
 
 function makeTempDocs(files) {
   const root = mkdtempSync(join(tmpdir(), 'audit-test-'));
@@ -71,5 +71,98 @@ describe('collectDocFiles', () => {
 
   it('returns empty array for non-existent directory', () => {
     expect(collectDocFiles('/tmp/does-not-exist-audit-test')).toEqual([]);
+  });
+});
+
+describe('checkBrokenLinks', () => {
+  let dir;
+  afterEach(() => rmSync(dir, { recursive: true, force: true }));
+
+  it('returns no findings when link target exists (.md)', () => {
+    dir = makeTempDocs({
+      'guides/page.md': '[see ref](../reference/exists)',
+      'reference/exists.md': '# Exists',
+    });
+    const files = collectDocFiles(dir);
+    expect(checkBrokenLinks(files)).toHaveLength(0);
+  });
+
+  it('flags a link whose target does not exist', () => {
+    dir = makeTempDocs({
+      'guides/page.md': '[broken](../reference/missing)',
+    });
+    const files = collectDocFiles(dir);
+    const findings = checkBrokenLinks(files);
+    expect(findings).toHaveLength(1);
+    expect(findings[0].check).toBe('broken-links');
+    expect(findings[0].text).toBe('../reference/missing');
+  });
+
+  it('skips external links', () => {
+    dir = makeTempDocs({
+      'guides/page.md': '[ext](https://example.com)',
+    });
+    const files = collectDocFiles(dir);
+    expect(checkBrokenLinks(files)).toHaveLength(0);
+  });
+
+  it('skips absolute paths', () => {
+    dir = makeTempDocs({
+      'guides/page.md': '[abs](/some/path)',
+    });
+    const files = collectDocFiles(dir);
+    expect(checkBrokenLinks(files)).toHaveLength(0);
+  });
+
+  it('resolves .mdx extension', () => {
+    dir = makeTempDocs({
+      'guides/page.md': '[see ref](../reference/thing)',
+      'reference/thing.mdx': '# Thing',
+    });
+    const files = collectDocFiles(dir);
+    expect(checkBrokenLinks(files)).toHaveLength(0);
+  });
+
+  it('includes line number in finding', () => {
+    dir = makeTempDocs({
+      'guides/page.md': '# Title\n\nSee [broken](./nope)',
+    });
+    const files = collectDocFiles(dir);
+    const findings = checkBrokenLinks(files);
+    expect(findings[0].line).toBe(3);
+  });
+});
+
+describe('checkCaseSensitivity', () => {
+  let dir;
+  afterEach(() => rmSync(dir, { recursive: true, force: true }));
+
+  it('returns no findings when case matches exactly', () => {
+    dir = makeTempDocs({
+      'guides/page.md': '[ref](../reference/Example)',
+      'reference/Example.md': '# Ex',
+    });
+    const files = collectDocFiles(dir);
+    expect(checkCaseSensitivity(files)).toHaveLength(0);
+  });
+
+  it('flags when link case differs from disk filename', () => {
+    dir = makeTempDocs({
+      'guides/page.md': '[ref](../reference/example)',
+      'reference/Example.md': '# Ex',
+    });
+    const files = collectDocFiles(dir);
+    const findings = checkCaseSensitivity(files);
+    expect(findings).toHaveLength(1);
+    expect(findings[0].check).toBe('case-sensitivity');
+    expect(findings[0].message).toMatch(/Example/);
+  });
+
+  it('skips links where parent directory does not exist', () => {
+    dir = makeTempDocs({
+      'guides/page.md': '[ref](../nonexistent/thing)',
+    });
+    const files = collectDocFiles(dir);
+    expect(checkCaseSensitivity(files)).toHaveLength(0);
   });
 });
