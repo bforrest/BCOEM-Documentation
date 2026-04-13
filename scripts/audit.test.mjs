@@ -2,7 +2,7 @@ import { describe, it, expect, afterEach } from 'vitest';
 import { mkdtempSync, writeFileSync, mkdirSync, rmSync } from 'node:fs';
 import { join, dirname } from 'node:path';
 import { tmpdir } from 'node:os';
-import { parseArgs, collectDocFiles, checkBrokenLinks, checkCaseSensitivity, checkMdxHazards, checkSidebarEntries, checkBasePath } from './audit.mjs';
+import { parseArgs, collectDocFiles, checkBrokenLinks, checkCaseSensitivity, checkMdxHazards, checkSidebarEntries, checkBasePath, checkImagePaths, checkSchemaDrift } from './audit.mjs';
 
 function makeTempDocs(files) {
   const root = mkdtempSync(join(tmpdir(), 'audit-test-'));
@@ -310,5 +310,80 @@ describe('checkBasePath', () => {
     });
     const files = collectDocFiles(dir);
     expect(checkBasePath(files, '/BCOEM-Documentation')).toHaveLength(0);
+  });
+});
+
+describe('checkImagePaths', () => {
+  let dir;
+  afterEach(() => rmSync(dir, { recursive: true, force: true }));
+
+  it('returns no findings when image exists relative to file', () => {
+    dir = makeTempDocs({ 'guides/page.md': '![alt](./img.png)' });
+    // create img.png next to page.md
+    writeFileSync(join(dir, 'guides/img.png'), '');
+    const files = collectDocFiles(dir);
+    expect(checkImagePaths(files, join(dir, 'assets'), join(dir, 'public'))).toHaveLength(0);
+  });
+
+  it('returns no findings when image exists in assetsDir', () => {
+    dir = makeTempDocs({ 'guides/page.md': '![alt](../assets/img.png)' });
+    mkdirSync(join(dir, 'assets'), { recursive: true });
+    writeFileSync(join(dir, 'assets/img.png'), '');
+    const files = collectDocFiles(dir);
+    expect(checkImagePaths(files, join(dir, 'assets'), join(dir, 'public'))).toHaveLength(0);
+  });
+
+  it('flags an image that does not exist anywhere', () => {
+    dir = makeTempDocs({ 'guides/page.md': '![alt](./missing.png)' });
+    const files = collectDocFiles(dir);
+    const findings = checkImagePaths(files, join(dir, 'assets'), join(dir, 'public'));
+    expect(findings).toHaveLength(1);
+    expect(findings[0].check).toBe('image-paths');
+  });
+
+  it('skips external image URLs', () => {
+    dir = makeTempDocs({ 'guides/page.md': '![alt](https://example.com/img.png)' });
+    const files = collectDocFiles(dir);
+    expect(checkImagePaths(files, '/tmp/assets', '/tmp/public')).toHaveLength(0);
+  });
+});
+
+describe('checkSchemaDrift', () => {
+  let dir;
+  afterEach(() => rmSync(dir, { recursive: true, force: true }));
+
+  it('returns no findings for valid frontmatter with title', async () => {
+    dir = makeTempDocs({ 'guides/page.md': '---\ntitle: My Page\n---\n\n# Content' });
+    const files = collectDocFiles(dir);
+    expect(await checkSchemaDrift(files)).toHaveLength(0);
+  });
+
+  it('flags missing title', async () => {
+    dir = makeTempDocs({ 'guides/page.md': '---\ndescription: No title\n---\n\n# Content' });
+    const files = collectDocFiles(dir);
+    const findings = await checkSchemaDrift(files);
+    expect(findings).toHaveLength(1);
+    expect(findings[0].check).toBe('schema-drift');
+    expect(findings[0].message).toMatch(/title/);
+  });
+
+  it('flags non-string description', async () => {
+    dir = makeTempDocs({ 'guides/page.md': '---\ntitle: T\ndescription: 42\n---\n\n# Content' });
+    const files = collectDocFiles(dir);
+    const findings = await checkSchemaDrift(files);
+    expect(findings).toHaveLength(1);
+    expect(findings[0].message).toMatch(/description/);
+  });
+
+  it('allows missing description (it is optional)', async () => {
+    dir = makeTempDocs({ 'guides/page.md': '---\ntitle: T\n---\n\n# Content' });
+    const files = collectDocFiles(dir);
+    expect(await checkSchemaDrift(files)).toHaveLength(0);
+  });
+
+  it('allows valid string description', async () => {
+    dir = makeTempDocs({ 'guides/page.md': '---\ntitle: T\ndescription: A description\n---\n' });
+    const files = collectDocFiles(dir);
+    expect(await checkSchemaDrift(files)).toHaveLength(0);
   });
 });

@@ -228,3 +228,68 @@ export function checkBasePath(files, basePath) {
   }
   return findings;
 }
+
+// ─── Check: image paths (deep) ────────────────────────────────────────────────
+
+export function checkImagePaths(files, assetsDir, publicDir) {
+  const findings = [];
+  const imgRe = /!\[[^\]]*\]\(([^)#?\s]+)/g;
+  const srcRe = /src=['"]([^'"#?]+)/g;
+  for (const file of files) {
+    file.lines.forEach((line, i) => {
+      imgRe.lastIndex = 0;
+      srcRe.lastIndex = 0;
+      let m;
+      const targets = [];
+      while ((m = imgRe.exec(line)) !== null) targets.push(m[1]);
+      while ((m = srcRe.exec(line)) !== null) targets.push(m[1]);
+      for (const target of targets) {
+        if (target.startsWith('http')) continue;
+        const candidates = [
+          join(dirname(file.path), target),
+          join(assetsDir, target.replace(/^\.?\//, '')),
+          join(publicDir, target.replace(/^\.?\//, '')),
+        ];
+        if (!candidates.some(existsSync)) {
+          findings.push({
+            check: 'image-paths',
+            file: file.path,
+            line: i + 1,
+            text: target,
+            message: `Image not found: ${target}`,
+          });
+        }
+      }
+    });
+  }
+  return findings;
+}
+
+// ─── Check: schema drift (deep) ───────────────────────────────────────────────
+
+export async function checkSchemaDrift(files) {
+  const { default: matter } = await import('gray-matter');
+  const findings = [];
+  for (const file of files) {
+    const { data } = matter(file.content);
+    if (!data.title || typeof data.title !== 'string') {
+      findings.push({
+        check: 'schema-drift',
+        file: file.path,
+        line: 1,
+        text: JSON.stringify(data.title ?? null),
+        message: 'Missing or non-string "title" in frontmatter (required by Starlight)',
+      });
+    }
+    if (data.description !== undefined && typeof data.description !== 'string') {
+      findings.push({
+        check: 'schema-drift',
+        file: file.path,
+        line: 1,
+        text: JSON.stringify(data.description),
+        message: '"description" frontmatter must be a string if present',
+      });
+    }
+  }
+  return findings;
+}
