@@ -23,5 +23,8 @@ pnpm-debug.log*
 # brainstorming session files
 .superpowers/
 
+# git worktrees
+.worktrees/
+
 # root-level issues.json from accidental script run outside project root
 /issues.json
