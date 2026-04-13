@@ -2,7 +2,7 @@ import { describe, it, expect, afterEach } from 'vitest';
 import { mkdtempSync, writeFileSync, mkdirSync, rmSync } from 'node:fs';
 import { join, dirname } from 'node:path';
 import { tmpdir } from 'node:os';
-import { parseArgs, collectDocFiles, checkBrokenLinks, checkCaseSensitivity, checkMdxHazards, checkSidebarEntries, checkBasePath, checkImagePaths, checkSchemaDrift } from './audit.mjs';
+import { parseArgs, collectDocFiles, checkBrokenLinks, checkCaseSensitivity, checkMdxHazards, checkSidebarEntries, checkBasePath, checkImagePaths, checkSchemaDrift, runAudit } from './audit.mjs';
 
 function makeTempDocs(files) {
   const root = mkdtempSync(join(tmpdir(), 'audit-test-'));
@@ -385,5 +385,71 @@ describe('checkSchemaDrift', () => {
     dir = makeTempDocs({ 'guides/page.md': '---\ntitle: T\ndescription: A description\n---\n' });
     const files = collectDocFiles(dir);
     expect(await checkSchemaDrift(files)).toHaveLength(0);
+  });
+});
+
+import { runAudit } from './audit.mjs';
+
+describe('runAudit', () => {
+  let dir;
+  afterEach(() => rmSync(dir, { recursive: true, force: true }));
+
+  it('returns a report with correct shape', async () => {
+    dir = mkdtempSync(join(tmpdir(), 'runaudit-test-'));
+    const docsDir = join(dir, 'src/content/docs/guides');
+    mkdirSync(docsDir, { recursive: true });
+    mkdirSync(join(dir, 'src/assets'), { recursive: true });
+    mkdirSync(join(dir, 'public'), { recursive: true });
+    writeFileSync(join(docsDir, 'example.md'), '---\ntitle: Example\n---\n\n# Hello');
+    writeFileSync(
+      join(dir, 'astro.config.mjs'),
+      `export default defineConfig({ base: '/BCOEM-Documentation', integrations: [starlight({ sidebar: [{ items: [{ slug: 'guides/example' }] }] })] })`
+    );
+
+    const report = await runAudit({ rootDir: dir });
+
+    expect(report).toHaveProperty('timestamp');
+    expect(report).toHaveProperty('deep', false);
+    expect(report.summary).toHaveProperty('totalFindings');
+    expect(typeof report.summary.totalFindings).toBe('number');
+    expect(Array.isArray(report.summary.passed)).toBe(true);
+    expect(Array.isArray(report.summary.failed)).toBe(true);
+    expect(Array.isArray(report.findings)).toBe(true);
+  });
+
+  it('runs deep checks when deep:true', async () => {
+    dir = mkdtempSync(join(tmpdir(), 'runaudit-deep-'));
+    const docsDir = join(dir, 'src/content/docs/guides');
+    mkdirSync(docsDir, { recursive: true });
+    mkdirSync(join(dir, 'src/assets'), { recursive: true });
+    mkdirSync(join(dir, 'public'), { recursive: true });
+    writeFileSync(join(docsDir, 'example.md'), '---\ntitle: Example\n---\n\n# Hello');
+    writeFileSync(join(dir, 'astro.config.mjs'), `export default { base: '/BCOEM-Documentation' }`);
+
+    const report = await runAudit({ rootDir: dir, deep: true });
+
+    expect(report.deep).toBe(true);
+    const allChecks = report.summary.passed.concat(report.summary.failed);
+    expect(allChecks).toContain('image-paths');
+    expect(allChecks).toContain('schema-drift');
+  });
+
+  it('file paths in findings are relative to rootDir', async () => {
+    dir = mkdtempSync(join(tmpdir(), 'runaudit-paths-'));
+    const docsDir = join(dir, 'src/content/docs/guides');
+    mkdirSync(docsDir, { recursive: true });
+    mkdirSync(join(dir, 'src/assets'), { recursive: true });
+    mkdirSync(join(dir, 'public'), { recursive: true });
+    // file with broken link to ensure findings exist
+    writeFileSync(join(docsDir, 'page.md'), '---\ntitle: Page\n---\n\n[broken](./missing)');
+    writeFileSync(join(dir, 'astro.config.mjs'), `export default { base: '/BCOEM-Documentation' }`);
+
+    const report = await runAudit({ rootDir: dir });
+
+    expect(report.findings.length).toBeGreaterThan(0);
+    // All file paths should be relative (not start with /)
+    for (const f of report.findings) {
+      expect(f.file).not.toMatch(/^\//);
+    }
   });
 });

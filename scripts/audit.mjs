@@ -293,3 +293,70 @@ export async function checkSchemaDrift(files) {
   }
   return findings;
 }
+
+// ─── Orchestrator ─────────────────────────────────────────────────────────────
+
+export async function runAudit({ deep = false, rootDir = process.cwd() } = {}) {
+  const docsDir = join(rootDir, 'src/content/docs');
+  const assetsDir = join(rootDir, 'src/assets');
+  const publicDir = join(rootDir, 'public');
+  const configPath = join(rootDir, 'astro.config.mjs');
+
+  // Read base path from config
+  const configContent = existsSync(configPath) ? readFileSync(configPath, 'utf-8') : '';
+  const baseMatch = configContent.match(/base:\s*['"]([^'"]+)['"]/);
+  const basePath = baseMatch ? baseMatch[1] : '';
+
+  const files = collectDocFiles(docsDir);
+
+  const allFindings = [
+    ...checkBrokenLinks(files),
+    ...checkCaseSensitivity(files),
+    ...checkMdxHazards(files),
+    ...(existsSync(configPath) ? checkSidebarEntries(files, configPath) : []),
+    ...(basePath ? checkBasePath(files, basePath) : []),
+  ];
+
+  if (deep) {
+    allFindings.push(
+      ...checkImagePaths(files, assetsDir, publicDir),
+      ...(await checkSchemaDrift(files))
+    );
+  }
+
+  // Relativise all file paths
+  const findings = allFindings.map((f) => ({
+    ...f,
+    file: relative(rootDir, f.file),
+  }));
+
+  const allCheckNames = ['broken-links', 'case-sensitivity', 'mdx-hazards', 'sidebar', 'base-path'];
+  if (deep) allCheckNames.push('image-paths', 'schema-drift');
+
+  const failedChecks = [...new Set(findings.map((f) => f.check))];
+  const passedChecks = allCheckNames.filter((c) => !failedChecks.includes(c));
+
+  return {
+    timestamp: new Date().toISOString(),
+    deep,
+    summary: { totalFindings: findings.length, passed: passedChecks, failed: failedChecks },
+    findings,
+  };
+}
+
+// ─── CLI entry point ──────────────────────────────────────────────────────────
+
+if (process.argv[1]?.endsWith('audit.mjs')) {
+  const { deep } = parseArgs(process.argv.slice(2));
+  runAudit({ deep }).then((report) => {
+    writeFileSync('audit-report.json', JSON.stringify(report, null, 2));
+    const { totalFindings } = report.summary;
+    console.log(`Audit complete: ${totalFindings} finding(s)`);
+    for (const f of report.findings) {
+      console.log(`  [${f.check}] ${f.file}:${f.line} — ${f.message}`);
+    }
+  }).catch((err) => {
+    console.error(err.message);
+    process.exit(1);
+  });
+}
