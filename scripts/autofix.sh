@@ -162,7 +162,7 @@ git push origin "$BRANCH"
 
 LABELS="docs-auto-fix"
 if [ "$BUILD_PASSED" = false ]; then
-  LABELS="docs-auto-fix,build-failing"
+  LABELS="build-failing"
 fi
 
 gh pr create \

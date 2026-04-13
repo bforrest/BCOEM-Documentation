@@ -388,8 +388,6 @@ describe('checkSchemaDrift', () => {
   });
 });
 
-import { runAudit } from './audit.mjs';
-
 describe('runAudit', () => {
   let dir;
   afterEach(() => rmSync(dir, { recursive: true, force: true }));
