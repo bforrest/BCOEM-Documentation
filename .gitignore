@@ -28,3 +28,6 @@ pnpm-debug.log*
 
 # root-level issues.json from accidental script run outside project root
 /issues.json
+
+# generated audit output
+audit-report.json
