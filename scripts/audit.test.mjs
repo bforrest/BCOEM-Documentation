@@ -131,6 +131,16 @@ describe('checkBrokenLinks', () => {
     const findings = checkBrokenLinks(files);
     expect(findings[0].line).toBe(3);
   });
+
+  it('finds multiple links on separate lines in the same file', () => {
+    dir = makeTempDocs({
+      'guides/page.md': '[first](./first)\n[second](./second)\n[third](./third)',
+    });
+    const files = collectDocFiles(dir);
+    const findings = checkBrokenLinks(files);
+    // all three targets are missing, so we should get 3 findings
+    expect(findings).toHaveLength(3);
+  });
 });
 
 describe('checkCaseSensitivity', () => {

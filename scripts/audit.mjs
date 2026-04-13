@@ -35,9 +35,9 @@ export function collectDocFiles(docsDir) {
 
 function extractInternalLinks(file) {
   const links = [];
-  const mdLinkRe = /\[(?:[^\]]*)\]\(([^)#?\s]+)/g;
-  const hrefRe = /href=['"]([^'"#?]+)/g;
   file.lines.forEach((line, i) => {
+    const mdLinkRe = /\[(?:[^\]]*)\]\(([^)#?\s]+)/g;
+    const hrefRe = /href=['"]([^'"#?]+)/g;
     let m;
     while ((m = mdLinkRe.exec(line)) !== null) {
       const t = m[1];
